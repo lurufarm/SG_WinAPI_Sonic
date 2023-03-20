@@ -2,11 +2,14 @@
 #include "sgGameObject.h"
 #include "sgAnimator.h"
 #include "sgCollider.h"
+#include "sgRigidbody.h"
 
 namespace sg
 {
+	class Rigidbody;
 	class Animator;
 	class Collider;
+	class Sonic;
 	class Ring : public GameObject
 	{
 
@@ -15,6 +18,7 @@ namespace sg
 		{
 			exist,
 			nonexistent,
+			rigid,
 		};
 
 		Ring();
@@ -24,7 +28,7 @@ namespace sg
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 		virtual void Release() override;
-		void SetSonic(GameObject* sonic) { mSonic = sonic; }
+		void SetRingState(eRingState state) { mRingState = state; }
 
 		virtual void OnCollisionEnter(class Collider* other) override;
 		virtual void OnCollisionStay(class Collider* other) override;
@@ -33,14 +37,17 @@ namespace sg
 	private:
 		void Exist();
 		void Nonexistent();
+		void Rigid();
 
 	private:
 
 		
 		Animator* mAnimator;
 		Collider* mRingCollider;
-		GameObject* mSonic;
-		eRingState eRingState;
+		Rigidbody* mRingRigidbody = nullptr;
+		Sonic* mSonic;
+		eRingState mRingState;
+		float mTime;
 
 	};
 }

@@ -31,17 +31,13 @@ namespace sg
 		mAnimator->CreateAnimation(L"ring_nonex", ring, Vector2(0, 16), 4, 2, 4, Vector2::Zero, 0.01);
 		mAnimator->Play(L"ring_exist", true);
 
-		eRingState = eRingState::exist;
-
+		mRingState = eRingState::exist;
 		GameObject::Initialize();
-
-
-
 
 	}
 	void Ring::Update()
 	{
-		switch (eRingState)
+		switch (mRingState)
 		{
 		case Ring::eRingState::exist:
 			Exist();
@@ -49,7 +45,8 @@ namespace sg
 		case Ring::eRingState::nonexistent:
 			Nonexistent();
 			break;
-		default:
+		case Ring::eRingState::rigid:
+			Rigid();
 			break;
 		}
 
@@ -66,11 +63,12 @@ namespace sg
 	}
 	void Ring::OnCollisionEnter(Collider* other)
 	{
+		//mSonic = dynamic_cast<Sonic*>(other->GetOwner());
+		mAnimator->Play(L"ring_nonex", true);
+		mRingState = eRingState::nonexistent;
 	}
 	void Ring::OnCollisionStay(Collider* other)
 	{
-		mAnimator->Play(L"ring_nonex", true);
-		eRingState = eRingState::nonexistent;
 	}
 	void Ring::OnCollisionExit(Collider* other)
 	{
@@ -82,5 +80,14 @@ namespace sg
 	void Ring::Nonexistent()
 	{
 		object::Destroy(this);
+	}
+	void Ring::Rigid()
+	{
+		mTime += Time::DeltaTime();
+		mAnimator->Play(L"ring_exist", true);
+		if (mTime >= 3.0f)
+		{
+			mRingState = eRingState::nonexistent;
+		}
 	}
 }

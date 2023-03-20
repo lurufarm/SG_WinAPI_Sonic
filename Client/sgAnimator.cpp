@@ -159,7 +159,6 @@ namespace sg
 		}
 
 		mActiveAnimation = FindAnimation(name);
-		//mActiveAnimation->Reset();
 		mbLoop = loop;
 
 		Animator::Events* events
@@ -167,6 +166,12 @@ namespace sg
 
 		if (events != nullptr)
 			events->mStartEvent();
+
+		if (loop == true
+			&& mActiveAnimation->IsComplete())
+		{
+			mActiveAnimation->Reset();
+		}
 	}
 
 	Animator::Events* Animator::FindEvents(const std::wstring& name)

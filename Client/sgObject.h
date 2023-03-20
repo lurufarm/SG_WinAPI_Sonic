@@ -24,8 +24,8 @@ namespace sg::object
 		Scene* scene = SceneManager::SetScene(scenetype);
 //		Scene* scene = SceneManager::GetActiveScene();
 		scene->AddGameObject(gameobj, type);
-		gameobj->Initialize();
 		gameobj->GameObject::GetComponent<Transform>()->SetPos(pos);
+		gameobj->Initialize();
 		return gameobj;
 	}
 

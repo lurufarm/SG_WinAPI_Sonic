@@ -7,7 +7,7 @@ namespace sg
 	class Image : public Resource
 	{
 	public:
-		static Image* Create(const std::wstring& name, UINT width, UINT height);
+		static Image* Create(const std::wstring& name, UINT width, UINT height, COLORREF rgb = RGB(255, 255,255));
 
 		Image();
 		~Image();

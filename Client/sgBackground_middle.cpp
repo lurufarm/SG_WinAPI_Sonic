@@ -41,9 +41,9 @@ void sg::Background_middle::Render(HDC hdc)
     // 이미지 출력
     for (size_t i = 0; i < 25600; i += 1280)
     {
-        int x = static_cast<int>(cPos.x - background_middle->GetWidth() / 2.0f + i + sonicPos.x / 2.0 );
-        int y = static_cast<int>(cPos.y - background_middle->GetHeight() / 2.0f + 2826);
-        TransparentBlt(hdc, x-2560, y, background_middle->GetWidth(), background_middle->GetHeight(),
+        int x = static_cast<int>(cPos.x - background_middle->GetWidth() / 2.0f + i + sonicPos.x / 3.0 );
+        int y = static_cast<int>(cPos.y - background_middle->GetHeight() / 2.0f + 2828);
+        TransparentBlt(hdc, x-2560, y, background_middle->GetWidth(), background_middle->GetHeight()*1.02,
             background_middle->GetHdc(), 0, 0, background_middle->GetWidth(), background_middle->GetHeight(), RGB(255, 0, 255));
     }
 }

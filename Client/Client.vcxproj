@@ -145,8 +145,10 @@
     <ClInclude Include="sgMapDeco4.h" />
     <ClInclude Include="sgMapWater1.h" />
     <ClInclude Include="sgPlayUI.h" />
+    <ClInclude Include="sgRhinobot.h" />
     <ClInclude Include="sgRigidbody.h" />
     <ClInclude Include="sgRing.h" />
+    <ClInclude Include="sgTestGround.h" />
     <ClInclude Include="sgTitlebg.h" />
     <ClInclude Include="sgTitletails.h" />
     <ClInclude Include="sgTitletitle.h" />
@@ -212,11 +214,13 @@
     <ClCompile Include="sgPlayUI.cpp" />
     <ClCompile Include="sgResource.cpp" />
     <ClCompile Include="sgResources.cpp" />
+    <ClCompile Include="sgRhinobot.cpp" />
     <ClCompile Include="sgRigidbody.cpp" />
     <ClCompile Include="sgRing.cpp" />
     <ClCompile Include="sgScene.cpp" />
     <ClCompile Include="sgSceneManager.cpp" />
     <ClCompile Include="sgSonic.cpp" />
+    <ClCompile Include="sgTestGround.cpp" />
     <ClCompile Include="sgTime.cpp" />
     <ClCompile Include="sgTitlebg.cpp" />
     <ClCompile Include="sgTitleScene.cpp" />

@@ -2,7 +2,7 @@
 #include "sgEntity.h"
 #include "sgComponent.h"
 
-namespace sg 
+namespace sg
 {
 	class GameObject : public Entity
 	{
@@ -46,8 +46,10 @@ namespace sg
 				if (dynamic_cast<T*>(comp))
 					return dynamic_cast<T*>(comp);
 			}
+
 			return nullptr;
 		}
+		
 
 		eState GetState() { return mState; }
 		void SetState(eState state) { mState = state; }
@@ -58,4 +60,3 @@ namespace sg
 	};
 
 }
-

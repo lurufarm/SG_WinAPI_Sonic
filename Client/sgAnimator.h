@@ -62,6 +62,8 @@ namespace sg
 		std::function<void()>& GetCompleteEvent(const std::wstring& name);
 		std::function<void()>& GetEndEvent(const std::wstring& name);
 		bool IsComplete() { return mActiveAnimation->IsComplete(); }
+		void Reset() { mActiveAnimation->Reset(); }
+
 
 	private:
 		std::map<std::wstring, Animation*> mAnimations;

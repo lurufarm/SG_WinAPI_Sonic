@@ -11,8 +11,9 @@ namespace sg
 		: Component(eComponentType::Collider)
 		, mCenter(Vector2::Zero)
 		, mPos(Vector2::Zero)
-		, mSize(30.0f, 30.0f)
+		, mSize(100.0f, 100.0f)
 		, mID(ColliderNumber++)
+		, mCollisionCount(0)
 	{
 
 	}
@@ -21,6 +22,8 @@ namespace sg
 	}
 	void Collider::Initialize()
 	{
+		Transform* tr = GetOwner()->GetComponent<Transform>();
+		mPos = tr->GetPos() + mCenter;
 	}
 	void Collider::Update()
 	{
@@ -29,7 +32,12 @@ namespace sg
 	}
 	void Collider::Render(HDC hdc)
 	{
-		HPEN pen = CreatePen(BS_SOLID, 2, RGB(255, 0, 255));
+		HPEN pen = NULL;
+		if (mCollisionCount <= 0)
+			pen = CreatePen(BS_SOLID, 2, RGB(255, 0, 255));
+		else
+			pen = CreatePen(BS_SOLID, 2, RGB(0, 0, 255));
+
 		HPEN oldpen = (HPEN)SelectObject(hdc, pen);
 		HBRUSH brush = (HBRUSH)GetStockObject(NULL_BRUSH);
 		HBRUSH oldbrush = (HBRUSH)SelectObject(hdc, brush);
@@ -40,6 +48,8 @@ namespace sg
 		(HPEN)SelectObject(hdc, oldpen);
 		(HBRUSH)SelectObject(hdc, oldbrush);
 		DeleteObject(pen);
+
+		mCollisionCount = 0;
 	}
 	void Collider::Release()
 	{
@@ -50,6 +60,7 @@ namespace sg
 	}
 	void Collider::OnCollisionStay(Collider* other)
 	{
+		mCollisionCount = 1;
 		GetOwner()->OnCollisionStay(other);
 	}
 	void Collider::OnCollisionExit(Collider* other)

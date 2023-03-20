@@ -1,5 +1,6 @@
 #pragma once
 #include "sgComponent.h"
+#include "sgObject.h"
 
 
 namespace sg
@@ -27,6 +28,7 @@ namespace sg
 		
 	private:
 		static UINT ColliderNumber;
+		UINT mCollisionCount;
 		UINT mID;
 		Vector2 mCenter;
 		Vector2 mSize;

@@ -25,6 +25,7 @@ namespace sg
 		A,
 		S,
 		D,
+		Space,
 		END,
 	};
 
@@ -43,7 +44,7 @@ namespace sg
 		static void Initialize();
 		static void Update();
 		static void Render(HDC hdc);
-
+		inline static eKeyState GetKeyStateNone() { return eKeyState::None; }
 		inline static eKeyState GetKeyState(eKeyCode keyCode)
 		{
 			return mKeys[(UINT)keyCode].state;

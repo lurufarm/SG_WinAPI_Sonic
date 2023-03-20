@@ -22,6 +22,7 @@ namespace sg
 		 'A',
 		 'S',
 		 'D',
+		 VK_SPACE,
 		 
 		 
 		//VK_LEFT,

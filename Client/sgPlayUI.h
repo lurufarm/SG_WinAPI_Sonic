@@ -3,6 +3,7 @@
 
 namespace sg
 {
+	class Sonic;
 	class PlayUI : public GameObject
 	{
 	public:
@@ -15,8 +16,13 @@ namespace sg
 		virtual void Render(HDC hdc) override;
 		virtual void Release() override;
 
+		static void SetTarget(Sonic* target) { mPlayer = target; }
+
+
 	private:
 
+		static Sonic* mPlayer;
+		int value;
 	};
 
 }
