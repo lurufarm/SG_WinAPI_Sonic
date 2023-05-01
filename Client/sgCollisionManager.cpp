@@ -4,7 +4,7 @@
 
 namespace sg
 {
-	WORD CollisionManager::mMatrix[(UINT)eLayerType::End] = {};
+	INT CollisionManager::mMatrix[(UINT)eLayerType::End] = {};
 	std::map<UINT64, bool>CollisionManager::mCollisionMap;
 
 	void CollisionManager::Update()

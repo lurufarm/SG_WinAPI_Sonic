@@ -13,6 +13,7 @@ namespace sg
 	Redcard::Redcard()
 		:mTime(0.0f)
 	{
+		this->SetName(L"Redcard");
 	}
 	Redcard::~Redcard()
 	{
@@ -26,14 +27,18 @@ namespace sg
 		mAnimator->CreateAnimation(L"redcard_", mredcard, Vector2::Zero, 1, 1, 1, Vector2::Zero, 5);
 		mAnimator->Play(L"redcard_", false);
 		Transform* rctr = GetComponent<Transform>();
-		Vector2 rctr_pos = rctr->GetPos();
-		rctr_pos.x = 1500;
-		rctr_pos.y = 2000;
 		rctr->SetScale(Vector2(0.5f, 0.5f));
-		rctr->SetPos(rctr_pos);
+		if (SceneManager::GetActiveScene2() == eSceneType::Play)
+		{
+			rctr->SetPos(Vector2(410, 1230));
+		}
+		else
+		{
+			rctr->SetPos(Vector2(200, 230));
+		}
 
 
-		//mfadestate = efade::start;
+		mfadestate = efade::start;
 
 		GameObject::Initialize();
 	}
@@ -64,22 +69,39 @@ namespace sg
 	}
 	void Redcard::Start()
 	{
-		Transform* rctr = GetComponent<Transform>();
-		Vector2 rctr_pos = rctr->GetPos();
+			Transform* rctr = GetComponent<Transform>();
+			Vector2 rctr_pos = rctr->GetPos();
 
-		if(rctr_pos.y < 2800)
+		if (SceneManager::GetActiveScene2() == eSceneType::Play)
 		{
-			rctr_pos.y += 1600.0f * Time::DeltaTime();
-			rctr->SetPos(rctr_pos);
-		}
+			if (rctr_pos.y < 2030)
+			{
+				rctr_pos.y += 1600.0f * Time::DeltaTime();
+				rctr->SetPos(rctr_pos);
+			}
 
-		if (rctr_pos.y >= 2800)
+			if (rctr_pos.y >= 2030)
+			{
+				mfadestate = efade::stay;
+				rctr_pos.y = 2030;
+				rctr->SetPos(rctr_pos);
+			}
+		}
+		else
 		{
-			mfadestate = efade::stay;
-			rctr_pos.y = 2800;
-			rctr->SetPos(rctr_pos);
-		}
+			if (rctr_pos.y < 1430)
+			{
+				rctr_pos.y += 1600.0f * Time::DeltaTime();
+				rctr->SetPos(rctr_pos);
+			}
 
+			if (rctr_pos.y >= 1430)
+			{
+				mfadestate = efade::stay;
+				rctr_pos.y = 1430;
+				rctr->SetPos(rctr_pos);
+			}
+		}
 	}
 	void Redcard::Stay()
 	{
@@ -98,7 +120,7 @@ namespace sg
 		Vector2 rctr_pos = rctr->GetPos();
 			rctr_pos.y -= 1600.0f * Time::DeltaTime();
 			rctr->SetPos(rctr_pos);
-			if (rctr_pos.y < 0)
+			if (rctr_pos.y < -770)
 			{
 				object::Destroy(this);
 			}

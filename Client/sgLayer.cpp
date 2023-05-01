@@ -34,17 +34,32 @@ namespace sg
 
 	void Layer::Update()
 	{
-		for (GameObject* gameObj : mGameObjects)
+		/*for (int i =0;i< mGameObjects.size();i++)
 		{
-			if (gameObj == nullptr)
+			if (mGameObjects[i] == nullptr)
 				continue;
 
-			if (gameObj->GetState()
+			if (mGameObjects[i]->GetState()
 				!= GameObject::eState::Active)
 				continue;
 
-			gameObj->Update();
+			mGameObjects[i]->Update();
+		}*/
 
+
+		for (GameObject* gameObj : mGameObjects)
+		{
+			if (gameObj == nullptr)
+			{
+				continue;
+			}
+			if (gameObj->GetState()
+				!= GameObject::eState::Active)
+			{
+				continue;
+			}
+
+			gameObj->Update();
 		}
 	}
 

@@ -62,13 +62,13 @@ namespace sg
 		Vector2 intro_tails_pos = intro_tails_tr->GetPos();
 		mAnimator->Play(L"intro_tails_right_ani", true);
 		intro_tails_tr->SetScale(Vector2(3.5f, 3.5f));
-		intro_tails_pos.y = 3000;
+		intro_tails_pos.y = -300;
 		intro_tails_pos.x += 300.0f * Time::DeltaTime();
 		intro_tails_tr->SetPos(intro_tails_pos);
 		
-		if (intro_tails_pos.x > 2500)
+		if (intro_tails_pos.x > 1100)
 		{
-			intro_tails_pos.y = 3200;
+			intro_tails_pos.y = -800;
 			mtailsState = eTailsState::left;
 		}
 	}
@@ -78,13 +78,13 @@ namespace sg
 		Vector2 intro_tails_pos = intro_tails_tr->GetPos();
 		mAnimator->Play(L"intro_tails_left_ani", true);
 		intro_tails_tr->SetScale(Vector2(2.0f, 2.0f));
-		intro_tails_pos.y = 3200;
+		intro_tails_pos.y = -100;
 		intro_tails_pos.x -= 200.0f * Time::DeltaTime();
 		intro_tails_tr->SetPos(intro_tails_pos);
 
-		if (intro_tails_pos.x < 1050)
+		if (intro_tails_pos.x < -400)
 		{
-			intro_tails_pos.y = 3000;
+			intro_tails_pos.y = -300;
 			mtailsState = eTailsState::right;
 		}
 

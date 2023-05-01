@@ -2,6 +2,7 @@
 #include "sgTransform.h"
 #include "sgGameObject.h"
 #include "sgCamera.h"
+#include "sgInput.h"
 
 
 namespace sg
@@ -14,6 +15,7 @@ namespace sg
 		, mSize(100.0f, 100.0f)
 		, mID(ColliderNumber++)
 		, mCollisionCount(0)
+		, mOnOff(true)
 	{
 
 	}
@@ -24,38 +26,55 @@ namespace sg
 	{
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		mPos = tr->GetPos() + mCenter;
+		
 	}
 	void Collider::Update()
 	{
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		mPos = tr->GetPos() + mCenter;
+
+		if (Input::GetKeyDown(eKeyCode::Ctrl))
+		{
+			if (mOnOff == true)
+			{
+				mOnOff = false;
+			}
+			else
+			{
+				mOnOff = true;
+			}
+		}
 	}
 	void Collider::Render(HDC hdc)
 	{
-		HPEN pen = NULL;
-		if (mCollisionCount <= 0)
-			pen = CreatePen(BS_SOLID, 2, RGB(255, 0, 255));
-		else
-			pen = CreatePen(BS_SOLID, 2, RGB(0, 0, 255));
+		if (mOnOff == true) {
 
-		HPEN oldpen = (HPEN)SelectObject(hdc, pen);
-		HBRUSH brush = (HBRUSH)GetStockObject(NULL_BRUSH);
-		HBRUSH oldbrush = (HBRUSH)SelectObject(hdc, brush);
+			HPEN pen = NULL;
+			if (mCollisionCount <= 0 && mOnOff == true)
+				pen = CreatePen(BS_SOLID, 2, RGB(255, 0, 255));
+			else
+				pen = CreatePen(BS_SOLID, 2, RGB(0, 0, 255));
 
-		Vector2 pos = Camera::CalculatePos(mPos);
-		Rectangle(hdc, pos.x, pos.y, pos.x + mSize.x, pos.y + mSize.y);
+			HPEN oldpen = (HPEN)SelectObject(hdc, pen);
+			HBRUSH brush = (HBRUSH)GetStockObject(NULL_BRUSH);
+			HBRUSH oldbrush = (HBRUSH)SelectObject(hdc, brush);
 
-		(HPEN)SelectObject(hdc, oldpen);
-		(HBRUSH)SelectObject(hdc, oldbrush);
-		DeleteObject(pen);
+			Vector2 pos = Camera::CalculatePos(mPos);
+			Rectangle(hdc, pos.x, pos.y, pos.x + mSize.x, pos.y + mSize.y);
 
-		mCollisionCount = 0;
+			(HPEN)SelectObject(hdc, oldpen);
+			(HBRUSH)SelectObject(hdc, oldbrush);
+			DeleteObject(pen);
+
+			mCollisionCount = 0;
+		}
 	}
 	void Collider::Release()
 	{
 	}
 	void Collider::OnCollisionEnter(Collider* other)
 	{
+		Vector2 normal = GetNormal(other);
 		GetOwner()->OnCollisionEnter(other);
 	}
 	void Collider::OnCollisionStay(Collider* other)
@@ -67,4 +86,28 @@ namespace sg
 	{
 		GetOwner()->OnCollisionExit(other);
 	}
+
+	Vector2 Collider::GetNormal(Collider* other)
+	{
+		Vector2 diff = other->mPos - mPos;
+		Vector2 half = (mSize + other->mSize) / 2.0f;
+			
+		float x_overlap = half.x - fabs(diff.x);
+		float y_overlap = half.y - fabs(diff.y);
+
+		if (x_overlap > 0 && y_overlap > 0)
+		{
+			if (x_overlap < y_overlap)
+			{
+				return Vector2(diff.x > 0 ? half.x : -half.x, 0.0f).Nomalize();
+			}
+			else
+			{
+				return Vector2(0.0f, diff.y > 0 ? half.y : -half.y).Nomalize();
+			}
+		}
+
+		return Vector2::Zero;
+	}
+
 }

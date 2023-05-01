@@ -1,14 +1,10 @@
 #include "sgInput.h"
+#include "sgApplication.h"
+
+extern sg::Application application;
 
 namespace sg
 {
-
-	//int ASCII[(UINT)eKeyCode::END] = {
-	//	'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P',
-	//	'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L',
-	//	'Z', 'X', 'C', 'V', 'B', 'N', 'M',
-	//};
-
 	 int Keyboard[(UINT)eKeyCode::END] = {
 
 		 0x25,
@@ -23,6 +19,8 @@ namespace sg
 		 'S',
 		 'D',
 		 VK_SPACE,
+		 VK_LBUTTON,
+		 VK_RBUTTON,
 		 
 		 
 		//VK_LEFT,
@@ -34,8 +32,8 @@ namespace sg
 		//ESC
 	};
 
-	//std::vector<Input::Key> Input::mKeys;
 	 std::vector<Input::Key> Input::mKeys;
+	 Vector2 Input::mMousePos = Vector2::Zero;
 
 	void Input::Initialize()
 	{
@@ -50,30 +48,58 @@ namespace sg
 			mKeys.push_back(keyInfo);
 		}
 	}
+
 	void Input::Update()
 	{
-		for (UINT i = 0; i < (UINT)eKeyCode::END; i++)
+		if (GetFocus())
 		{
-			if (GetAsyncKeyState(Keyboard[i]) & 0x8000)
+			for (UINT i = 0; i < (UINT)eKeyCode::END; i++)
 			{
-				if (mKeys[i].bPressed)
-					mKeys[i].state = eKeyState::Pressed;
+				if (GetAsyncKeyState(Keyboard[i]) & 0x8000)
+				{
+					if (mKeys[i].bPressed)
+						mKeys[i].state = eKeyState::Pressed;
+					else
+						mKeys[i].state = eKeyState::Down;
+
+					mKeys[i].bPressed = true;
+				}
 				else
-					mKeys[i].state = eKeyState::Down;
-				
-				mKeys[i].bPressed = true;
+				{
+					if (mKeys[i].bPressed)
+						mKeys[i].state = eKeyState::Up;
+					else
+						mKeys[i].state = eKeyState::None;
+
+					mKeys[i].bPressed = false;
+				}
 			}
-			else 
+
+			POINT mousePos = {};
+			GetCursorPos(&mousePos);
+			ScreenToClient(application.GetHwnd(), &mousePos);
+			mMousePos.x = mousePos.x;
+			mMousePos.y = mousePos.y;
+		}
+		else
+		{
+			for (UINT i = 0; i < (UINT)eKeyCode::END; i++)
 			{
-				if (mKeys[i].bPressed) 
+				if (eKeyState::Down == mKeys[i].state
+					|| eKeyState::Pressed == mKeys[i].state)
+				{
 					mKeys[i].state = eKeyState::Up;
-				else 
+				}
+				else if (eKeyState::Up == mKeys[i].state)
+				{
 					mKeys[i].state = eKeyState::None;
+				}
 
 				mKeys[i].bPressed = false;
 			}
 		}
 	}
+
 	void Input::Render(HDC hdc)
 	{
 	}

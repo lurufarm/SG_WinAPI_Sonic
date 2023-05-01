@@ -11,8 +11,14 @@
     <Filter Include="Contents">
       <UniqueIdentifier>{e848902c-bb52-4098-a1fb-f43db7903bb6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Character">
-      <UniqueIdentifier>{d9f33df8-3add-4d76-8efe-14f4651a4973}</UniqueIdentifier>
+    <Filter Include="Contents\0.Scene">
+      <UniqueIdentifier>{a73279c5-d029-4b77-947c-dfdccc78d771}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\2.PlayScene">
+      <UniqueIdentifier>{98890a0b-ff1a-4390-8e28-86f3f7a93011}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\3.Playscene2">
+      <UniqueIdentifier>{7ef47cce-43c9-497b-8526-020d7d67663a}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine">
       <UniqueIdentifier>{e56b6fae-e3c8-4d0e-82a8-176d93f843b5}</UniqueIdentifier>
@@ -22,9 +28,6 @@
     </Filter>
     <Filter Include="Engine\High Level Interface">
       <UniqueIdentifier>{679b63df-24e1-4d92-8a8a-1e1af3eafc3c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Scene">
-      <UniqueIdentifier>{cbf011e8-1134-46f6-9e7e-37aa972e3a28}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\Component">
       <UniqueIdentifier>{38828b4f-64e9-4dab-8ddf-4eebd22018e4}</UniqueIdentifier>
@@ -59,26 +62,29 @@
     <Filter Include="Engine\Camera">
       <UniqueIdentifier>{e5675245-f7bb-4f88-8edf-4108ff5d2eaf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\0.Scene">
-      <UniqueIdentifier>{a73279c5-d029-4b77-947c-dfdccc78d771}</UniqueIdentifier>
+    <Filter Include="Engine\Scene">
+      <UniqueIdentifier>{cbf011e8-1134-46f6-9e7e-37aa972e3a28}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\1.TitleScene%29">
-      <UniqueIdentifier>{8ac9ec13-6139-4868-861c-19d28c501f6f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\2.PlayScene%29">
-      <UniqueIdentifier>{98890a0b-ff1a-4390-8e28-86f3f7a93011}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\2.PlayScene%29\MapCard">
-      <UniqueIdentifier>{9c649eab-fc61-46af-af76-33b6f280ccf3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\2.PlayScene%29\Background">
-      <UniqueIdentifier>{8b14e9a9-b1a4-4ce3-8382-05d7d4496cd1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\2.PlayScene%29\MapObjects">
+    <Filter Include="Contents\MapObjects">
       <UniqueIdentifier>{eeff4100-54d8-49aa-adad-6d8bdf77b1f9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Character\Monster">
-      <UniqueIdentifier>{89342698-14cd-4678-85a3-6b7dfbc48e46}</UniqueIdentifier>
+    <Filter Include="Contents\Item">
+      <UniqueIdentifier>{5f261751-3933-4071-b39f-06db48ddf1f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Character">
+      <UniqueIdentifier>{10131906-19a0-4784-8108-aff7d444e3e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Character\Enemy">
+      <UniqueIdentifier>{31e3a701-9ed0-4c42-a013-1b7a78cfc1ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\1.TitleScene">
+      <UniqueIdentifier>{8ac9ec13-6139-4868-861c-19d28c501f6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\4.EndingScene">
+      <UniqueIdentifier>{823fcb1a-92a5-4088-90c0-a8fa035ed75a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\UI">
+      <UniqueIdentifier>{9c649eab-fc61-46af-af76-33b6f280ccf3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -124,9 +130,6 @@
     <ClInclude Include="sgSceneManager.h">
       <Filter>Engine\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="sgSonic.h">
-      <Filter>Contents\Character</Filter>
-    </ClInclude>
     <ClInclude Include="sgPlayScene.h">
       <Filter>Contents\0.Scene</Filter>
     </ClInclude>
@@ -164,22 +167,22 @@
       <Filter>Engine\Component\Collider</Filter>
     </ClInclude>
     <ClInclude Include="sgTitlebg.h">
-      <Filter>Contents\1.TitleScene%29</Filter>
+      <Filter>Contents\1.TitleScene</Filter>
     </ClInclude>
     <ClInclude Include="sgTitlesonic.h">
-      <Filter>Contents\1.TitleScene%29</Filter>
+      <Filter>Contents\1.TitleScene</Filter>
     </ClInclude>
     <ClInclude Include="sgCollisionManager.h">
       <Filter>Engine\Component\Collider</Filter>
     </ClInclude>
     <ClInclude Include="sgTitletitle.h">
-      <Filter>Contents\1.TitleScene%29</Filter>
+      <Filter>Contents\1.TitleScene</Filter>
     </ClInclude>
     <ClInclude Include="sgTitletails.h">
-      <Filter>Contents\1.TitleScene%29</Filter>
+      <Filter>Contents\1.TitleScene</Filter>
     </ClInclude>
     <ClInclude Include="sgTitleUI.h">
-      <Filter>Contents\1.TitleScene%29</Filter>
+      <Filter>Contents\1.TitleScene</Filter>
     </ClInclude>
     <ClInclude Include="sgCamera.h">
       <Filter>Engine\Camera</Filter>
@@ -187,59 +190,188 @@
     <ClInclude Include="sgObject.h">
       <Filter>Engine\GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="sgPlayUI.h">
-      <Filter>Contents\2.PlayScene%29</Filter>
-    </ClInclude>
     <ClInclude Include="sgRedcard.h">
-      <Filter>Contents\2.PlayScene%29\MapCard</Filter>
+      <Filter>Contents\UI</Filter>
     </ClInclude>
     <ClInclude Include="sgZone1.h">
-      <Filter>Contents\2.PlayScene%29\MapCard</Filter>
+      <Filter>Contents\UI</Filter>
     </ClInclude>
     <ClInclude Include="sgAct1.h">
-      <Filter>Contents\2.PlayScene%29\MapCard</Filter>
+      <Filter>Contents\UI</Filter>
     </ClInclude>
     <ClInclude Include="sgRigidbody.h">
       <Filter>Engine\Component\Rigidbody</Filter>
     </ClInclude>
-    <ClInclude Include="sgTestGround.h">
-      <Filter>Contents\Character</Filter>
+    <ClInclude Include="sgMapRock_l.h">
+      <Filter>Contents\MapObjects</Filter>
     </ClInclude>
-    <ClInclude Include="sgRhinobot.h">
-      <Filter>Contents\Character\Monster</Filter>
+    <ClInclude Include="sgGroundMgr.h">
+      <Filter>Contents\MapObjects</Filter>
     </ClInclude>
-    <ClInclude Include="sgBackground.h">
-      <Filter>Contents\2.PlayScene%29\Background</Filter>
+    <ClInclude Include="sgMovingTerrain.h">
+      <Filter>Contents\MapObjects</Filter>
     </ClInclude>
-    <ClInclude Include="sgBackground_middle.h">
-      <Filter>Contents\2.PlayScene%29\Background</Filter>
+    <ClInclude Include="sgRope.h">
+      <Filter>Contents\MapObjects</Filter>
     </ClInclude>
-    <ClInclude Include="sgBackground_middle2.h">
-      <Filter>Contents\2.PlayScene%29\Background</Filter>
+    <ClInclude Include="sgSpring.h">
+      <Filter>Contents\MapObjects</Filter>
     </ClInclude>
-    <ClInclude Include="sgBackground_sea.h">
-      <Filter>Contents\2.PlayScene%29\Background</Filter>
-    </ClInclude>
-    <ClInclude Include="sgMapWater1.h">
-      <Filter>Contents\2.PlayScene%29\Background</Filter>
-    </ClInclude>
-    <ClInclude Include="sgMapDeco1.h">
-      <Filter>Contents\2.PlayScene%29\MapObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="sgMapDeco2.h">
-      <Filter>Contents\2.PlayScene%29\MapObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="sgMapDeco3.h">
-      <Filter>Contents\2.PlayScene%29\MapObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="sgMapDeco4.h">
-      <Filter>Contents\2.PlayScene%29\MapObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="sgMapObjects.h">
-      <Filter>Contents\2.PlayScene%29\MapObjects</Filter>
+    <ClInclude Include="sgItem.h">
+      <Filter>Contents\Item</Filter>
     </ClInclude>
     <ClInclude Include="sgRing.h">
-      <Filter>Contents\2.PlayScene%29\MapObjects</Filter>
+      <Filter>Contents\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="sgPlayScene2.h">
+      <Filter>Contents\0.Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="sgBackground2.h">
+      <Filter>Contents\3.Playscene2</Filter>
+    </ClInclude>
+    <ClInclude Include="sgMapObjects2.h">
+      <Filter>Contents\3.Playscene2</Filter>
+    </ClInclude>
+    <ClInclude Include="sgGround2.h">
+      <Filter>Contents\3.Playscene2</Filter>
+    </ClInclude>
+    <ClInclude Include="sgWater.h">
+      <Filter>Contents\MapObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="sgLogplatform.h">
+      <Filter>Contents\MapObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="sgPlayUI.h">
+      <Filter>Contents\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="sgBreakingterrain.h">
+      <Filter>Contents\MapObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="sgLogbridge.h">
+      <Filter>Contents\MapObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="sgScenechange.h">
+      <Filter>Contents\MapObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="sgSpike.h">
+      <Filter>Contents\MapObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="sgWall.h">
+      <Filter>Contents\MapObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="sgMapWater4.h">
+      <Filter>Contents\2.PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="sgBackground.h">
+      <Filter>Contents\2.PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="sgBackground_middle.h">
+      <Filter>Contents\2.PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="sgBackground_middle2.h">
+      <Filter>Contents\2.PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="sgBackground_sea.h">
+      <Filter>Contents\2.PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="sgForeground.h">
+      <Filter>Contents\2.PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="sgMapObjects.h">
+      <Filter>Contents\2.PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="sgMapWater1.h">
+      <Filter>Contents\2.PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="sgMapWater2.h">
+      <Filter>Contents\2.PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="sgMapWater3.h">
+      <Filter>Contents\2.PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="sgMapDeco4.h">
+      <Filter>Contents\MapObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="sgMapDeco1.h">
+      <Filter>Contents\MapObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="sgMapDeco2.h">
+      <Filter>Contents\MapObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="sgMapDeco3.h">
+      <Filter>Contents\MapObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="sgEffect.h">
+      <Filter>Contents\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="sgEffect2.h">
+      <Filter>Contents\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="sgSonic.h">
+      <Filter>Contents\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="sgBloomBullet.h">
+      <Filter>Contents\Character\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="sgBloominator.h">
+      <Filter>Contents\Character\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="sgBomber.h">
+      <Filter>Contents\Character\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="sgBomberboom.h">
+      <Filter>Contents\Character\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="sgCaterkiller.h">
+      <Filter>Contents\Character\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="sgEnemyEffect.h">
+      <Filter>Contents\Character\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="sgLastboss.h">
+      <Filter>Contents\Character\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="sgLastbossR.h">
+      <Filter>Contents\Character\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="sgLBEffect.h">
+      <Filter>Contents\Character\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="sgMiniboss.h">
+      <Filter>Contents\Character\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="sgRhinobot.h">
+      <Filter>Contents\Character\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="sgTestGround.h">
+      <Filter>Contents\2.PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="sgKnuckles.h">
+      <Filter>Contents\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="sgMapDeco5.h">
+      <Filter>Contents\MapObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="sgButton.h">
+      <Filter>Contents\MapObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="sgEndingScene.h">
+      <Filter>Contents\0.Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="sgEndST.h">
+      <Filter>Contents\4.EndingScene</Filter>
+    </ClInclude>
+    <ClInclude Include="sgForeground2.h">
+      <Filter>Contents\3.Playscene2</Filter>
+    </ClInclude>
+    <ClInclude Include="sgSound.h">
+      <Filter>Engine\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="sgSoundManager.h">
+      <Filter>Engine\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="sgWatersplash.h">
+      <Filter>Contents\MapObjects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -269,9 +401,6 @@
     </ClCompile>
     <ClCompile Include="sgSceneManager.cpp">
       <Filter>Engine\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="sgSonic.cpp">
-      <Filter>Contents\Character</Filter>
     </ClCompile>
     <ClCompile Include="sgPlayScene.cpp">
       <Filter>Contents\0.Scene</Filter>
@@ -307,79 +436,205 @@
       <Filter>Engine\Component\Collider</Filter>
     </ClCompile>
     <ClCompile Include="sgTitlebg.cpp">
-      <Filter>Contents\1.TitleScene%29</Filter>
+      <Filter>Contents\1.TitleScene</Filter>
     </ClCompile>
     <ClCompile Include="sgTitlesonic.cpp">
-      <Filter>Contents\1.TitleScene%29</Filter>
+      <Filter>Contents\1.TitleScene</Filter>
     </ClCompile>
     <ClCompile Include="sgCollisionManager.cpp">
       <Filter>Engine\Component\Collider</Filter>
     </ClCompile>
     <ClCompile Include="sgTitletitle.cpp">
-      <Filter>Contents\1.TitleScene%29</Filter>
+      <Filter>Contents\1.TitleScene</Filter>
     </ClCompile>
     <ClCompile Include="sgTitletails.cpp">
-      <Filter>Contents\1.TitleScene%29</Filter>
+      <Filter>Contents\1.TitleScene</Filter>
     </ClCompile>
     <ClCompile Include="sgTitleUI.cpp">
-      <Filter>Contents\1.TitleScene%29</Filter>
+      <Filter>Contents\1.TitleScene</Filter>
     </ClCompile>
     <ClCompile Include="sgCamera.cpp">
       <Filter>Engine\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="sgPlayUI.cpp">
-      <Filter>Contents\2.PlayScene%29</Filter>
-    </ClCompile>
     <ClCompile Include="sgRedcard.cpp">
-      <Filter>Contents\2.PlayScene%29\MapCard</Filter>
+      <Filter>Contents\UI</Filter>
     </ClCompile>
     <ClCompile Include="sgZone1.cpp">
-      <Filter>Contents\2.PlayScene%29\MapCard</Filter>
+      <Filter>Contents\UI</Filter>
     </ClCompile>
     <ClCompile Include="sgAct1.cpp">
-      <Filter>Contents\2.PlayScene%29\MapCard</Filter>
+      <Filter>Contents\UI</Filter>
     </ClCompile>
     <ClCompile Include="sgRigidbody.cpp">
       <Filter>Engine\Component\Rigidbody</Filter>
     </ClCompile>
-    <ClCompile Include="sgTestGround.cpp">
-      <Filter>Contents\Character</Filter>
+    <ClCompile Include="sgMapRock_l.cpp">
+      <Filter>Contents\MapObjects</Filter>
     </ClCompile>
-    <ClCompile Include="sgRhinobot.cpp">
-      <Filter>Contents\Character\Monster</Filter>
+    <ClCompile Include="sgMovingTerrain.cpp">
+      <Filter>Contents\MapObjects</Filter>
     </ClCompile>
-    <ClCompile Include="sgBackground.cpp">
-      <Filter>Contents\2.PlayScene%29\Background</Filter>
+    <ClCompile Include="sgRope.cpp">
+      <Filter>Contents\MapObjects</Filter>
     </ClCompile>
-    <ClCompile Include="sgBackground_middle.cpp">
-      <Filter>Contents\2.PlayScene%29\Background</Filter>
+    <ClCompile Include="sgSpring.cpp">
+      <Filter>Contents\MapObjects</Filter>
     </ClCompile>
-    <ClCompile Include="sgBackground_middle2.cpp">
-      <Filter>Contents\2.PlayScene%29\Background</Filter>
-    </ClCompile>
-    <ClCompile Include="sgBackground_sea.cpp">
-      <Filter>Contents\2.PlayScene%29\Background</Filter>
-    </ClCompile>
-    <ClCompile Include="sgMapWater1.cpp">
-      <Filter>Contents\2.PlayScene%29\Background</Filter>
-    </ClCompile>
-    <ClCompile Include="sgMapDeco1.cpp">
-      <Filter>Contents\2.PlayScene%29\MapObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="sgMapDeco2.cpp">
-      <Filter>Contents\2.PlayScene%29\MapObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="sgMapDeco3.cpp">
-      <Filter>Contents\2.PlayScene%29\MapObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="sgMapDeco4.cpp">
-      <Filter>Contents\2.PlayScene%29\MapObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="sgMapObjects.cpp">
-      <Filter>Contents\2.PlayScene%29\MapObjects</Filter>
+    <ClCompile Include="sgItem.cpp">
+      <Filter>Contents\Item</Filter>
     </ClCompile>
     <ClCompile Include="sgRing.cpp">
-      <Filter>Contents\2.PlayScene%29\MapObjects</Filter>
+      <Filter>Contents\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="sgPlayScene2.cpp">
+      <Filter>Contents\0.Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="sgBackground2.cpp">
+      <Filter>Contents\3.Playscene2</Filter>
+    </ClCompile>
+    <ClCompile Include="sgMapObjects2.cpp">
+      <Filter>Contents\3.Playscene2</Filter>
+    </ClCompile>
+    <ClCompile Include="sgGround2.cpp">
+      <Filter>Contents\3.Playscene2</Filter>
+    </ClCompile>
+    <ClCompile Include="sgWater.cpp">
+      <Filter>Contents\MapObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="sgLogplatform.cpp">
+      <Filter>Contents\MapObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="sgPlayUI.cpp">
+      <Filter>Contents\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="sgBreakingterrain.cpp">
+      <Filter>Contents\MapObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="sgLogbridge.cpp">
+      <Filter>Contents\MapObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="sgScenechange.cpp">
+      <Filter>Contents\MapObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="sgSpike.cpp">
+      <Filter>Contents\MapObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="sgWall.cpp">
+      <Filter>Contents\MapObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="sgBackground.cpp">
+      <Filter>Contents\2.PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="sgBackground_middle.cpp">
+      <Filter>Contents\2.PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="sgBackground_middle2.cpp">
+      <Filter>Contents\2.PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="sgBackground_sea.cpp">
+      <Filter>Contents\2.PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="sgForeground.cpp">
+      <Filter>Contents\2.PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="sgMapObjects.cpp">
+      <Filter>Contents\2.PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="sgMapWater1.cpp">
+      <Filter>Contents\2.PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="sgMapWater2.cpp">
+      <Filter>Contents\2.PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="sgMapWater3.cpp">
+      <Filter>Contents\2.PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="sgMapWater4.cpp">
+      <Filter>Contents\2.PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="sgMapDeco1.cpp">
+      <Filter>Contents\MapObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="sgMapDeco2.cpp">
+      <Filter>Contents\MapObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="sgMapDeco3.cpp">
+      <Filter>Contents\MapObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="sgMapDeco4.cpp">
+      <Filter>Contents\MapObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="sgEffect.cpp">
+      <Filter>Contents\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="sgEffect2.cpp">
+      <Filter>Contents\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="sgSonic.cpp">
+      <Filter>Contents\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="sgBloomBullet.cpp">
+      <Filter>Contents\Character\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="sgBloominator.cpp">
+      <Filter>Contents\Character\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="sgBomber.cpp">
+      <Filter>Contents\Character\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="sgBomberboom.cpp">
+      <Filter>Contents\Character\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="sgCaterkiller.cpp">
+      <Filter>Contents\Character\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="sgEnemyEffect.cpp">
+      <Filter>Contents\Character\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="sgLastboss.cpp">
+      <Filter>Contents\Character\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="sgLastbossR.cpp">
+      <Filter>Contents\Character\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="sgLBEffect.cpp">
+      <Filter>Contents\Character\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="sgMiniboss.cpp">
+      <Filter>Contents\Character\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="sgRhinobot.cpp">
+      <Filter>Contents\Character\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="sgTestGround.cpp">
+      <Filter>Contents\2.PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="sgKnuckles.cpp">
+      <Filter>Contents\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="sgMapDeco5.cpp">
+      <Filter>Contents\MapObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="sgButton.cpp">
+      <Filter>Contents\MapObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="sgEndingScene.cpp">
+      <Filter>Contents\0.Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="sgEndST.cpp">
+      <Filter>Contents\4.EndingScene</Filter>
+    </ClCompile>
+    <ClCompile Include="sgForeground2.cpp">
+      <Filter>Contents\3.Playscene2</Filter>
+    </ClCompile>
+    <ClCompile Include="sgSound.cpp">
+      <Filter>Engine\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="sgSoundManager.cpp">
+      <Filter>Engine\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="sgWatersplash.cpp">
+      <Filter>Contents\MapObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

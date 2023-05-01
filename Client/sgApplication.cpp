@@ -1,9 +1,12 @@
+#include "Resource.h"
+
 #include "sgApplication.h"
 #include "sgSceneManager.h"
 #include "sgTime.h"
 #include "sgInput.h"
 #include "sgCollisionManager.h"
 #include "sgCamera.h"
+#include "sgSoundManager.h"
 
 namespace sg
 {
@@ -45,8 +48,10 @@ namespace sg
 			, 0);
 		ShowWindow(hWnd, true);
 
+
 		mBackBuffer = CreateCompatibleBitmap(mHdc, mWidth, mHeight);
 		mBackHDC = CreateCompatibleDC(mHdc);
+		mMenubar = LoadMenu(nullptr, MAKEINTRESOURCE(IDI_CLIENT));
 
 		HBITMAP defaultBitmap
 			= (HBITMAP)SelectObject(mBackHDC, mBackBuffer);
@@ -54,8 +59,11 @@ namespace sg
 
 		Time::Initialize();
 		Input::Initialize();
+		SoundManager::Initialize();
 		SceneManager::Initialize();
 		Camera::Initialize();
+
+		SetMenuBar(false);
 	}
 
 	void Application::Run()
@@ -67,6 +75,7 @@ namespace sg
 
 	void Application::Update()
 	{
+
 		Time::Update();
 		Input::Update();
 		Camera::Update();
@@ -88,9 +97,23 @@ namespace sg
 		BitBlt(mHdc, 0, 0, mWidth, mHeight, mBackHDC, 0, 0, SRCCOPY);
 
 	}
+	void Application::SetMenuBar(bool power)
+	{
+		SetMenu(mHwnd, mMenubar);
+
+		RECT rect = { 0, 0, mWidth, mHeight };
+		AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, power);
+
+		SetWindowPos(mHwnd
+			, nullptr, 0, 0
+			, rect.right - rect.left
+			, rect.bottom - rect.top
+			, 0);
+		ShowWindow(mHwnd, true);
+	}
 	void Application::clear()
 	{
-		HBRUSH greyBrush = CreateSolidBrush(RGB(121, 121, 121));
+		HBRUSH greyBrush = CreateSolidBrush(RGB(255, 255, 255));
 		HBRUSH oldBrush = (HBRUSH)SelectObject(mBackHDC, greyBrush);
 		Rectangle(mBackHDC, -1, -1, 1602, 902);
 		SelectObject(mBackHDC, oldBrush);

@@ -22,7 +22,7 @@ namespace sg
 
 	private:
 
-		Image* mapObjectImage[4];
+		Image* mapObjectImage[5];
 		class Collider* mCollider;
 		
 	};

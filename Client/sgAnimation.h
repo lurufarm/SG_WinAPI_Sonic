@@ -31,7 +31,6 @@ namespace sg
 		void Initialize();
 		void Update();
 		void Render(HDC hdc);
-		void Render(HDC hdc, int sourceconstantalpha);
 		void Create(Image* sheet, Vector2 leftTop, UINT coulmn, UINT row, UINT spriteLength, Vector2 offset, float duration);
 		void Reset();
 
@@ -39,6 +38,7 @@ namespace sg
 		void SetAnimator(Animator* animator) { mAnimator = animator; }
 		void SetAnimationName(const std::wstring& name) { mAnimationName = name; }
 		std::wstring& GetAnimationName() { return mAnimationName; }
+		int GetIndex() { return mSpriteIndex; }
 
 	private:
 		Animator* mAnimator;

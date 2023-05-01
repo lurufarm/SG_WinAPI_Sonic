@@ -21,6 +21,7 @@ namespace sg
 	private:
 
 		Titlesonic* mTitlesonic;
+		class Sound* mBG;
 	};
 
 };

@@ -28,7 +28,7 @@ namespace sg
 		static void Clear();
 
 	private:
-		static WORD mMatrix[(UINT)eLayerType::End];
+		static INT mMatrix[(UINT)eLayerType::End];
 		static std::map<UINT64, bool> mCollisionMap;
 	};
 }

@@ -11,6 +11,7 @@ namespace sg
 {
 	Backgroundsea::Backgroundsea()
 	{
+		this->SetName(L"Background_sea");
 	}
 	Backgroundsea::~Backgroundsea()
 	{

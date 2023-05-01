@@ -2,6 +2,10 @@
 #include "sgTime.h"
 #include "sgGameObject.h"
 #include "sgTransform.h"
+#include "sgTestGround.h"
+#include <iostream>
+
+extern sg::Ground* ground;
 
 namespace sg
 {
@@ -13,7 +17,7 @@ namespace sg
 		, mVelocity(Vector2::Zero)
 	{
 		mLimitedVelocity.x = 100.0f;
-		mLimitedVelocity.y = 1000.0f;
+		mLimitedVelocity.y = 800.0f;
 		mbGround = false;
 		mGravity = Vector2(0.0f, 800.0f);
 		mFriction = 250.0f;
@@ -25,15 +29,21 @@ namespace sg
 	}
 	void Rigidbody::Initialize()
 	{
+		//SetGroundClass(&ground);
 	}
 	void Rigidbody::Update()
 	{
 		//F = M * A
 		//A = M / F
-		mAccelation = mForce / mMass;
+		//Vector2 mAccel2 = mForce / mMass;
+		//mAccelation = mAccel2 + mAccel2 * ground->GetFrontPos();
+		mAccelation = mForce / mMass;	
 
 		//속도에 가속도를 더해준다.
+
 		mVelocity += mAccelation * Time::DeltaTime();
+
+
 
 		if (mbGround)
 		{
@@ -90,7 +100,10 @@ namespace sg
 		//속도에 맞게끔 물체를 이동시킨다.
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
+
 		pos += mVelocity * Time::DeltaTime();
+		tr->SetPos(pos);
+
 
 		//if (pos.y > 900.0f)
 		//	mbGround = true;
@@ -104,8 +117,5 @@ namespace sg
 	void Rigidbody::Release()
 	{
 	}
-	void Rigidbody::AddForce(Vector2 force)
-	{
-		mForce += force;
-	}
+
 }

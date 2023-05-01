@@ -13,25 +13,34 @@ namespace sg
 	Act1::Act1()
 		:mTime(0.0f)
 	{
+		this->SetName(L"Act1");
 	}
 	Act1::~Act1()
 	{
 	}
 	void Act1::Initialize()
 	{
-		mact = Resources::Load<Image>(L"act", L"..\\Resources\\fade\\act.bmp");
+		mact = Resources::Load<Image>(L"act1", L"..\\Resources\\fade\\act.bmp");
+		Image* act2 = Resources::Load<Image>(L"act2", L"..\\Resources\\fade\\act2.bmp");
 		mAnimator = AddComponent<Animator>();
-		mAnimator->CreateAnimation(L"act_", mact, Vector2::Zero, 1, 1, 1, Vector2::Zero, 5);
-		mAnimator->Play(L"act_", false);
+		mAnimator->CreateAnimation(L"act_1", mact, Vector2::Zero, 1, 1, 1, Vector2::Zero, 5);
+		mAnimator->CreateAnimation(L"act_2", act2, Vector2::Zero, 1, 1, 1, Vector2::Zero, 5);
+		//mAnimator->Play(L"act_1", false);
 		Transform* rctr = GetComponent<Transform>();
-		Vector2 rctr_pos = rctr->GetPos();
-		rctr_pos.x = 2800;
-		rctr_pos.y = 3450;
 		rctr->SetScale(Vector2(0.4f, 0.4f));
-		rctr->SetPos(rctr_pos);
+		if (SceneManager::GetActiveScene2() == eSceneType::Play)
+		{
+			mAnimator->Play(L"act_1", false);
+			rctr->SetPos(Vector2(1710, 2680));
+		}
+		else
+		{
+			mAnimator->Play(L"act_2", false);
+			rctr->SetPos(Vector2(1500, 2080));
+		}
 
 
-		//mfadestate = efade::start;
+		mfadestate = efade::start;
 
 		GameObject::Initialize();
 	}
@@ -65,25 +74,44 @@ namespace sg
 		Transform* rctr = GetComponent<Transform>();
 		Vector2 rctr_pos = rctr->GetPos();
 
-		if (rctr_pos.x > 2100)
+		if (SceneManager::GetActiveScene2() == eSceneType::Play)
 		{
-			rctr_pos.x -= 1500.0f * Time::DeltaTime();
-			rctr->SetPos(rctr_pos);
-		}
+			if (rctr_pos.x > 1050)
+			{
+				rctr_pos.x -= 1500.0f * Time::DeltaTime();
+				rctr->SetPos(rctr_pos);
+			}
 
-		if (rctr_pos.x <= 2100)
+			if (rctr_pos.x <= 1050)
+			{
+				mfadestate = efade::stay;
+				rctr_pos.x = 1050;
+				rctr->SetPos(rctr_pos);
+			}
+		}
+		else
 		{
-			mfadestate = efade::stay;
-			rctr_pos.x = 2100;
-			rctr->SetPos(rctr_pos);
-		}
+			mAnimator->Play(L"act_2", false);
+			if (rctr_pos.x > 840)
+			{
+				rctr_pos.x -= 1500.0f * Time::DeltaTime();
+				rctr->SetPos(rctr_pos);
+			}
 
+			if (rctr_pos.x <= 840)
+			{
+				mfadestate = efade::stay;
+				rctr_pos.x = 840;
+				rctr->SetPos(rctr_pos);
+			}
+		}
 	}
 	void Act1::Stay()
 	{
 		Transform* rctr = GetComponent<Transform>();
 		Vector2 rctr_pos = rctr->GetPos();
 		mTime += Time::DeltaTime();
+
 		if (mTime >= 0.8f)
 		{
 			mfadestate = efade::exit;
@@ -96,7 +124,7 @@ namespace sg
 		Vector2 rctr_pos = rctr->GetPos();
 		rctr_pos.x += 1200.0f * Time::DeltaTime();
 		rctr->SetPos(rctr_pos);
-		if (rctr_pos.x > 3500)
+		if (rctr_pos.x > 2730)
 		{
 			object::Destroy(this);
 		}

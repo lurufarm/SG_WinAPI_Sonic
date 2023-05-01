@@ -1,6 +1,9 @@
 #pragma once
 #include "sgEntity.h"
 #include "sgComponent.h"
+#include "sgPlayScene.h"
+
+extern sg::Sonic* mSonic;
 
 namespace sg
 {
@@ -25,6 +28,8 @@ namespace sg
 		virtual void OnCollisionEnter(class Collider* other);
 		virtual void OnCollisionStay(class Collider* other);
 		virtual void OnCollisionExit(class Collider* other);
+
+		Sonic* GetSonic() { return mSonic; }
 
 
 		template <typename T>
@@ -53,6 +58,7 @@ namespace sg
 
 		eState GetState() { return mState; }
 		void SetState(eState state) { mState = state; }
+		bool mUse;
 
 	private:
 		std::vector<Component*> mComponents;

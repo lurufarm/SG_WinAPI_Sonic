@@ -24,6 +24,7 @@ namespace sg
 		static void SetTarget(GameObject* target) { mTarget = target; }
 		static Vector2 GetCameraPos() { return mLookPos; }
 		static Vector2 CalculatePos(Vector2 pos) { return pos - mDistance; }
+		static void SetType(eCameraEffectType type) { mType = type; }
 
 	private:
 		static Vector2 mResolution;

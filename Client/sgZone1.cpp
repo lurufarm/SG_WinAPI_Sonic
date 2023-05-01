@@ -13,6 +13,7 @@ namespace sg
 	Zone1::Zone1()
 		:mTime(0.0f)
 	{
+		this->SetName(L"Zone1");
 	}
 	Zone1::~Zone1()
 	{
@@ -25,13 +26,18 @@ namespace sg
 		mAnimator->Play(L"zone_", false);
 		Transform* rctr = GetComponent<Transform>();
 		Vector2 rctr_pos = rctr->GetPos();
-		rctr_pos.x = 2500;
-		rctr_pos.y = 3200;
 		rctr->SetScale(Vector2(0.4f, 0.4f));
-		rctr->SetPos(rctr_pos);
+		if (SceneManager::GetActiveScene2() == eSceneType::Play)
+		{
+			rctr->SetPos(Vector2(1410, 2430));
+		}
+		else
+		{
+			rctr->SetPos(Vector2(1200, 1830));
+		}
 
 
-		//mfadestate = efade::start;
+		mfadestate = efade::start;
 
 		GameObject::Initialize();
 	}
@@ -65,17 +71,35 @@ namespace sg
 		Transform* rctr = GetComponent<Transform>();
 		Vector2 rctr_pos = rctr->GetPos();
 
-		if (rctr_pos.x > 1800)
+		if (SceneManager::GetActiveScene2() == eSceneType::Play)
 		{
-			rctr_pos.x -= 1200.0f * Time::DeltaTime();
-			rctr->SetPos(rctr_pos);
-		}
+			if (rctr_pos.x > 710)
+			{
+				rctr_pos.x -= 1200.0f * Time::DeltaTime();
+				rctr->SetPos(rctr_pos);
+			}
 
-		if (rctr_pos.x <= 1800)
+			if (rctr_pos.x <= 710)
+			{
+				mfadestate = efade::stay;
+				rctr_pos.x = 710;
+				rctr->SetPos(rctr_pos);
+			}
+		}
+		else
 		{
-			mfadestate = efade::stay;
-			rctr_pos.x = 1800;
-			rctr->SetPos(rctr_pos);
+			if (rctr_pos.x > 500)
+			{
+				rctr_pos.x -= 1200.0f * Time::DeltaTime();
+				rctr->SetPos(rctr_pos);
+			}
+
+			if (rctr_pos.x <= 500)
+			{
+				mfadestate = efade::stay;
+				rctr_pos.x = 500;
+				rctr->SetPos(rctr_pos);
+			}
 		}
 
 	}
@@ -96,7 +120,7 @@ namespace sg
 		Vector2 rctr_pos = rctr->GetPos();
 		rctr_pos.x += 1200.0f * Time::DeltaTime();
 		rctr->SetPos(rctr_pos);
-		if (rctr_pos.x > 3500)
+		if (rctr_pos.x > 2410)
 		{
 			object::Destroy(this);
 		}

@@ -1,8 +1,13 @@
 #include "sgSceneManager.h"
 #include "sgPlayScene.h"
+#include "sgPlayScene2.h"
 #include "sgTitleScene.h"
+#include "sgEndingScene.h"
 #include "sgCollisionManager.h"
 #include "sgCamera.h"
+#include "sgApplication.h"
+
+extern sg::Application application;
 
 namespace sg
 {
@@ -15,8 +20,8 @@ namespace sg
 		
 		mScenes[(UINT)eSceneType::Title] = new TitleScene();
 		mScenes[(UINT)eSceneType::Play] = new PlayScene();
-
-		
+		mScenes[(UINT)eSceneType::Play2] = new PlayScene2();
+		mScenes[(UINT)eSceneType::Ending] = new EndingScene();
 
 		for (Scene* scene : mScenes)
 		{
@@ -35,6 +40,7 @@ namespace sg
 
 	void SceneManager::Render(HDC hdc)
 	{
+		Camera::Render(hdc);
 		mActiveScene->Render(hdc);
 	}
 
@@ -61,7 +67,6 @@ namespace sg
 
 		//«ˆ¿Á æ¿
 		mActiveScene->OnExit();
-		
 		CollisionManager::Clear();
 		//¥Ÿ¿Ω æ¿
 		mActiveScene = mScenes[(UINT)type];

@@ -41,7 +41,6 @@ namespace sg
 		virtual void Initialize() override;
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
-		virtual void Render(HDC hdc, int sourceconstantalpha);
 		virtual	void Release() override;
 
 
@@ -63,6 +62,11 @@ namespace sg
 		std::function<void()>& GetEndEvent(const std::wstring& name);
 		bool IsComplete() { return mActiveAnimation->IsComplete(); }
 		void Reset() { mActiveAnimation->Reset(); }
+
+		int GetAniIndex(const std::wstring& name) { 
+			Animation* ani = FindAnimation(name);
+			return ani->GetIndex();
+		};
 
 
 	private:

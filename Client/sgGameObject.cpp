@@ -5,6 +5,7 @@ namespace sg
 {
 	GameObject::GameObject()
 		: mState(eState::Active)
+		, mUse(false)
 	{
 		mComponents.resize((UINT)eComponentType::End);
 		AddComponent<Transform>();

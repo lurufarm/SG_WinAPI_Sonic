@@ -22,6 +22,7 @@ namespace sg
 
 
 		void AddGameObject(GameObject* obj, eLayerType layer);
+		void AddGameObject(std::vector<GameObject*>objects, eLayerType layer);
 		std::vector<GameObject*>& GetGameObjects(eLayerType layer);
 
 	private:

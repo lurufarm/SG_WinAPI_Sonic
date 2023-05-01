@@ -53,15 +53,10 @@ namespace sg
 			mActiveAnimation->Render(hdc);
 		}
 	}
-	void Animator::Render(HDC hdc, int sourceconstantalpha)
-	{
-		if (mActiveAnimation)
-		{
-			mActiveAnimation->Render(hdc, sourceconstantalpha);
-		}
-	}
+
 	void Animator::Release()
 	{
+
 	}
 	void Animator::CreateAnimation(const std::wstring& name
 		, Image* sheet, Vector2 leftTop

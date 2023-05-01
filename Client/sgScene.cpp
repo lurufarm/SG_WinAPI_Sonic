@@ -43,6 +43,11 @@ namespace sg
 			for (std::vector<GameObject*>::iterator iter = gameObjects.begin()
 				; iter != gameObjects.end();)
 			{
+				if ((*iter)->GetName() == L"Effect")
+				{
+					int a = 0;
+				}
+
 				if ((*iter)->GetState() == GameObject::eState::Death)
 				{
 					deleteGameObjects.push_back((*iter));
@@ -63,13 +68,11 @@ namespace sg
 	}
 	void Scene::Release()
 	{
-		//for (Layer& layer : mLayers)
-		//{
-		//	layer.Release();
-		//}
 	}
 	void Scene::OnEnter()
 	{
+
+
 	}
 	void Scene::OnExit()
 	{
@@ -77,6 +80,14 @@ namespace sg
 	void Scene::AddGameObject(GameObject* obj, eLayerType layer)
 	{
 		mLayers[(UINT)layer].AddGameObject(obj);
+	}
+
+	void Scene::AddGameObject(std::vector<GameObject*>objects, eLayerType layer)
+	{
+		for (GameObject* obj : objects)
+		{
+			mLayers[(UINT)layer].AddGameObject(obj);
+		}
 	}
 	
 	 std::vector<GameObject*>& Scene::GetGameObjects(eLayerType layer)

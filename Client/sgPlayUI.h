@@ -16,13 +16,21 @@ namespace sg
 		virtual void Render(HDC hdc) override;
 		virtual void Release() override;
 
-		static void SetTarget(Sonic* target) { mPlayer = target; }
+		void SetTarget(Sonic* target) { mPlayer = target; }
 
 
 	private:
 
-		static Sonic* mPlayer;
-		int value;
+		Sonic* mPlayer;
+		class Image* mImage;
+		float mTime;
+		int mTimeint;
+		float mRings;
+		float mLife;
+
+		LOGFONT mFont;
+		LOGFONT mFont2;
+
 	};
 
 }

@@ -45,6 +45,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <EnableUnitySupport>true</EnableUnitySupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -105,7 +106,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -133,11 +134,43 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="sgAct1.h" />
+    <ClInclude Include="sgBackground2.h" />
     <ClInclude Include="sgBackground_middle.h" />
     <ClInclude Include="sgBackground_middle2.h" />
+    <ClInclude Include="sgBloomBullet.h" />
+    <ClInclude Include="sgBloominator.h" />
+    <ClInclude Include="sgBomber.h" />
+    <ClInclude Include="sgBomberboom.h" />
+    <ClInclude Include="sgBreakingterrain.h" />
+    <ClInclude Include="sgButton.h" />
     <ClInclude Include="sgCamera.h" />
+    <ClInclude Include="sgCaterkiller.h" />
     <ClInclude Include="sgCollider.h" />
     <ClInclude Include="sgCollisionManager.h" />
+    <ClInclude Include="sgEffect.h" />
+    <ClInclude Include="sgEffect2.h" />
+    <ClInclude Include="sgEndingScene.h" />
+    <ClInclude Include="sgEndST.h" />
+    <ClInclude Include="sgEnemyEffect.h" />
+    <ClInclude Include="sgForeground2.h" />
+    <ClInclude Include="sgGround2.h" />
+    <ClInclude Include="sgItem.h" />
+    <ClInclude Include="sgForeground.h" />
+    <ClInclude Include="sgKnuckles.h" />
+    <ClInclude Include="sgLastboss.h" />
+    <ClInclude Include="sgLastbossR.h" />
+    <ClInclude Include="sgLBEffect.h" />
+    <ClInclude Include="sgLogbridge.h" />
+    <ClInclude Include="sgLogplatform.h" />
+    <ClInclude Include="sgMapDeco5.h" />
+    <ClInclude Include="sgMapObjects2.h" />
+    <ClInclude Include="sgMapRock_l.h" />
+    <ClInclude Include="sgMapWater2.h" />
+    <ClInclude Include="sgMapWater3.h" />
+    <ClInclude Include="sgMapWater4.h" />
+    <ClInclude Include="sgMiniboss.h" />
+    <ClInclude Include="sgMovingTerrain.h" />
+    <ClInclude Include="sgPlayScene2.h" />
     <ClInclude Include="sgRedcard.h" />
     <ClInclude Include="sgMapDeco1.h" />
     <ClInclude Include="sgMapDeco2.h" />
@@ -148,11 +181,21 @@
     <ClInclude Include="sgRhinobot.h" />
     <ClInclude Include="sgRigidbody.h" />
     <ClInclude Include="sgRing.h" />
+    <ClInclude Include="sgRope.h" />
+    <ClInclude Include="sgScenechange.h" />
+    <ClInclude Include="sgSonic.h" />
+    <ClInclude Include="sgSound.h" />
+    <ClInclude Include="sgSoundManager.h" />
+    <ClInclude Include="sgSpike.h" />
+    <ClInclude Include="sgSpring.h" />
     <ClInclude Include="sgTestGround.h" />
     <ClInclude Include="sgTitlebg.h" />
     <ClInclude Include="sgTitletails.h" />
     <ClInclude Include="sgTitletitle.h" />
     <ClInclude Include="sgTitleUI.h" />
+    <ClInclude Include="sgWall.h" />
+    <ClInclude Include="sgWater.h" />
+    <ClInclude Include="sgWatersplash.h" />
     <ClInclude Include="sgZone1.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="sgAnimation.h" />
@@ -177,20 +220,52 @@
     <ClInclude Include="sgResources.h" />
     <ClInclude Include="sgScene.h" />
     <ClInclude Include="sgSceneManager.h" />
-    <ClInclude Include="sgSonic.h" />
     <ClInclude Include="sgTime.h" />
     <ClInclude Include="sgTitleScene.h" />
     <ClInclude Include="sgTransform.h" />
     <ClInclude Include="sgObject.h" />
+    <ClInclude Include="sgGroundMgr.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sgAct1.cpp" />
+    <ClCompile Include="sgBackground2.cpp" />
     <ClCompile Include="sgBackground_middle2.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="sgAnimation.cpp" />
     <ClCompile Include="sgAnimator.cpp" />
     <ClCompile Include="sgBackground_middle.cpp" />
+    <ClCompile Include="sgBloomBullet.cpp" />
+    <ClCompile Include="sgBloominator.cpp" />
+    <ClCompile Include="sgBomber.cpp" />
+    <ClCompile Include="sgBomberboom.cpp" />
+    <ClCompile Include="sgBreakingterrain.cpp" />
+    <ClCompile Include="sgButton.cpp" />
     <ClCompile Include="sgCamera.cpp" />
+    <ClCompile Include="sgCaterkiller.cpp" />
+    <ClCompile Include="sgEffect.cpp" />
+    <ClCompile Include="sgEffect2.cpp" />
+    <ClCompile Include="sgEndingScene.cpp" />
+    <ClCompile Include="sgEndST.cpp" />
+    <ClCompile Include="sgEnemyEffect.cpp" />
+    <ClCompile Include="sgForeground2.cpp" />
+    <ClCompile Include="sgGround2.cpp" />
+    <ClCompile Include="sgItem.cpp" />
+    <ClCompile Include="sgForeground.cpp" />
+    <ClCompile Include="sgKnuckles.cpp" />
+    <ClCompile Include="sgLastboss.cpp" />
+    <ClCompile Include="sgLastbossR.cpp" />
+    <ClCompile Include="sgLBEffect.cpp" />
+    <ClCompile Include="sgLogbridge.cpp" />
+    <ClCompile Include="sgLogplatform.cpp" />
+    <ClCompile Include="sgMapDeco5.cpp" />
+    <ClCompile Include="sgMapObjects2.cpp" />
+    <ClCompile Include="sgMapRock_l.cpp" />
+    <ClCompile Include="sgMapWater2.cpp" />
+    <ClCompile Include="sgMapWater3.cpp" />
+    <ClCompile Include="sgMapWater4.cpp" />
+    <ClCompile Include="sgMiniboss.cpp" />
+    <ClCompile Include="sgMovingTerrain.cpp" />
+    <ClCompile Include="sgPlayScene2.cpp" />
     <ClCompile Include="sgRedcard.cpp" />
     <ClCompile Include="sgMapDeco1.cpp" />
     <ClCompile Include="sgMapDeco2.cpp" />
@@ -217,9 +292,15 @@
     <ClCompile Include="sgRhinobot.cpp" />
     <ClCompile Include="sgRigidbody.cpp" />
     <ClCompile Include="sgRing.cpp" />
+    <ClCompile Include="sgRope.cpp" />
     <ClCompile Include="sgScene.cpp" />
+    <ClCompile Include="sgScenechange.cpp" />
     <ClCompile Include="sgSceneManager.cpp" />
     <ClCompile Include="sgSonic.cpp" />
+    <ClCompile Include="sgSound.cpp" />
+    <ClCompile Include="sgSoundManager.cpp" />
+    <ClCompile Include="sgSpike.cpp" />
+    <ClCompile Include="sgSpring.cpp" />
     <ClCompile Include="sgTestGround.cpp" />
     <ClCompile Include="sgTime.cpp" />
     <ClCompile Include="sgTitlebg.cpp" />
@@ -229,6 +310,9 @@
     <ClCompile Include="sgTitleUI.cpp" />
     <ClCompile Include="sgTransform.cpp" />
     <ClCompile Include="sgTitlesonic.cpp" />
+    <ClCompile Include="sgWall.cpp" />
+    <ClCompile Include="sgWater.cpp" />
+    <ClCompile Include="sgWatersplash.cpp" />
     <ClCompile Include="sgZone1.cpp" />
   </ItemGroup>
   <ItemGroup>

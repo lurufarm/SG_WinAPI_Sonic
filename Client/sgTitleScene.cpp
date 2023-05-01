@@ -10,12 +10,14 @@
 
 #include "sgInput.h"
 #include "sgSceneManager.h"
-#include "sgCollisionManager.h"
 #include "sgImage.h"
 #include "sgResources.h"
-#include "sgTransform.h"
-#include "sgCamera.h"
 #include "sgObject.h"
+#include "sgCamera.h"
+#include "sgSound.h"
+
+#include "sgTransform.h"
+#include "sgCollisionManager.h"
 
 namespace sg
 {
@@ -28,10 +30,15 @@ namespace sg
 
 	void TitleScene::Initialize()
 	{
-
-		object::Instantiate<Titlebg>(Vector2(1350,2880), eLayerType::BG, eSceneType::Title);
-		object::Instantiate<Titletails>(Vector2(1150,2300),eLayerType::MapObjects, eSceneType::Title);
-		object::Instantiate<Titlesonic>(Vector2(1370,2700), eLayerType::MapObjects, eSceneType::Title);
+		Camera::SetTarget(nullptr);
+		mBG = Resources::Load<Sound>(L"TitleTheme", L"..\\Resources\\sound\\music\\title.wav");
+		mBG->Play(true);
+		//object::Instantiate<Titlebg>(Vector2(260,2110), eLayerType::BG, eSceneType::Title);
+		//object::Instantiate<Titletails>(Vector2(50,1530),eLayerType::MapObjects, eSceneType::Title);
+		//object::Instantiate<Titlesonic>(Vector2(280,1930), eLayerType::MapObjects, eSceneType::Title);
+		object::Instantiate<Titlebg>(Vector2(-560, -420), eLayerType::BG, eSceneType::Title);
+		object::Instantiate<Titletails>(Vector2(-480, -300), eLayerType::MapObjects, eSceneType::Title);
+		object::Instantiate<Titlesonic>(Vector2(-540, -600), eLayerType::MapObjects, eSceneType::Title);
 		object::Instantiate<Titletitle>(eLayerType::UI, eSceneType::Title);
 		object::Instantiate<TitleUI>(eLayerType::UI, eSceneType::Title);
 		
@@ -41,9 +48,6 @@ namespace sg
 		if (Input::GetKeyDown(eKeyCode::Enter))
 		{
 			SceneManager::LoadScene(eSceneType::Play);
-			Redcard* rc = object::Instantiate<Redcard>(eLayerType::UI, eSceneType::Play);
-			Zone1* zone1 = object::Instantiate<Zone1>(eLayerType::UI, eSceneType::Play);
-			Act1* act1 = object::Instantiate<Act1>(eLayerType::UI, eSceneType::Play);
 		}
 		Scene::Update();
 	}
@@ -57,9 +61,13 @@ namespace sg
 	}
 	void TitleScene::OnEnter()
 	{
-
+		Camera::SetTarget(nullptr);
 	}
 	void TitleScene::OnExit()
 	{
+		mBG->Stop(true);
+		Redcard* rc = object::Instantiate<Redcard>(eLayerType::UI, eSceneType::Play);
+		Zone1* zone1 = object::Instantiate<Zone1>(eLayerType::UI, eSceneType::Play);
+		Act1* act1 = object::Instantiate<Act1>(eLayerType::UI, eSceneType::Play);
 	}
 }

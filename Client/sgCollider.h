@@ -19,6 +19,8 @@ namespace sg
 		virtual void OnCollisionEnter(Collider* other);
 		virtual void OnCollisionStay(Collider* other);
 		virtual void OnCollisionExit(Collider* other);
+		
+		Vector2 GetNormal(Collider* other);
 
 		void SetCenter(Vector2 center) { mCenter = center; }
 		void SetSize(Vector2 size) { mSize = size; }
@@ -33,6 +35,8 @@ namespace sg
 		Vector2 mCenter;
 		Vector2 mSize;
 		Vector2 mPos;
+
+		bool mOnOff;
 	};
 }
 

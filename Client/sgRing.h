@@ -45,9 +45,12 @@ namespace sg
 		Animator* mAnimator;
 		Collider* mRingCollider;
 		Rigidbody* mRingRigidbody = nullptr;
-		Sonic* mSonic;
 		eRingState mRingState;
 		float mTime;
+
+		Sonic* mSon;
+
+		class Sound* sRing;
 
 	};
 }

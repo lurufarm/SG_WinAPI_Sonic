@@ -4,7 +4,6 @@ namespace sg
 {
     Component::Component(eComponentType type)
         : mType(type)
-        , mState(eComponentState::Normal)
     {
     }
     Component::~Component()

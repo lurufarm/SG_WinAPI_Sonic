@@ -26,7 +26,6 @@ namespace sg
 		virtual void Render(HDC hdc);
 		virtual void Release();
 		void SetSonic(GameObject* sonic) { mSonic = sonic; }
-		//void SetRange(int x1, int x2);
 
 		virtual void OnCollisionEnter(class Collider* other);
 		virtual void OnCollisionStay(class Collider* other);
@@ -42,13 +41,18 @@ namespace sg
 
 
 		eRhinoState mRhinoState;
-		Animator* mAnimator = AddComponent<Animator>();
-		Collider* mCollider = AddComponent<Collider>();
-		//Rigidbody* mRigidbody = AddComponent<Rigidbody>();
+		Animator* mAnimator;
+		Collider* mCollider;
+		Rigidbody* mRigidbody;
 
+		Vector2 mOriginPos;
 		float mTime;
 		float mAbility;
 		GameObject* mSonic;
+
+		class Sound* sMove;
+		class Sound* sDeath;
+		class Sound* sBoom;
 
 	};
 }

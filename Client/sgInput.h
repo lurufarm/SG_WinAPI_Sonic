@@ -26,6 +26,8 @@ namespace sg
 		S,
 		D,
 		Space,
+		LBUTTON,
+		RBUTTON,
 		END,
 	};
 
@@ -72,6 +74,7 @@ namespace sg
 
 	private:
 		static std::vector<Key>mKeys;
+		static Vector2 mMousePos;
 	};
 
 }

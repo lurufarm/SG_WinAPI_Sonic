@@ -8,12 +8,6 @@ namespace sg
 	{
 	public:
 
-		enum class eComponentState
-		{
-			Normal,
-			Disapper,
-		};
-
 		Component(eComponentType type);
 		~Component();
 
@@ -25,14 +19,11 @@ namespace sg
 		eComponentType GetType() { return mType; }
 		void SetOwner(GameObject* owner) { mOwner = owner; }
 		GameObject* GetOwner() { return mOwner; }
-		eComponentState GetState() { return mState; }
-		void SetState(eComponentState state) { mState = state; }
 
 	private:
 
 		const eComponentType mType;
 		GameObject* mOwner;
-		eComponentState mState;
 
 	};
 }

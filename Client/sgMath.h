@@ -10,6 +10,8 @@ struct Vector2
 	static Vector2 One;
 	static Vector2 Zero;
 
+	static Vector2 StopX;
+
 	float x;
 	float y;
 
@@ -52,6 +54,24 @@ struct Vector2
 		return temp;
 	}
 	Vector2 operator-(const Vector2& other)
+	{
+		Vector2 temp;
+		temp.x = x - other.x;
+		temp.y = y - other.y;
+
+		return temp;
+	}
+
+	Vector2 operator+ (const Vector2& other) const
+	{
+		Vector2 temp;
+		temp.x = x + other.x;
+		temp.y = y + other.y;
+
+		return temp;
+	}
+
+	Vector2 operator- (const Vector2 & other) const
 	{
 		Vector2 temp;
 		temp.x = x - other.x;
@@ -122,10 +142,49 @@ struct Vector2
 		y *= value;
 	}
 
+	bool operator >= (const Vector2& other)
+	{
+		return (x >= other.x && y >= other.y);
+	}
+	bool operator <= (const Vector2& other)
+	{
+		return (x <= other.x && y <= other.y);
+	}
+	bool operator > (const Vector2& other)
+	{
+		return (x > other.x && y > other.y);
+	}
+	bool operator < (const Vector2& other)
+	{
+		return (x < other.x&& y < other.y);
+	}
+
+	bool operator >= (const float& other)
+	{
+		return (x >= other && y >= other);
+	}
+	bool operator <= (const float& other)
+	{
+		return (x <= other && y <= other);
+	}
+	bool operator > (const float& other)
+	{
+		return (x > other && y > other);
+	}
+	bool operator < (const float& other)
+	{
+		return (x < other && y < other);
+	}
+
 	bool operator==(const Vector2& other)
 	{
 		return (x == other.x && y == other.y);
 	}
+	bool operator!=(const Vector2& other)
+	{
+		return (x != other.x || y != other.y);
+	}
+
 	
 	void Clear()
 	{
@@ -135,14 +194,25 @@ struct Vector2
 
 	float Length()
 	{
+
+		if (x == 0.0f && y == 0.0f)
+		{
+			int a = 0;
+		}
+
 		return sqrtf(x * x + y * y);
 	}
 
 	Vector2& Nomalize()
 	{
 		float length = Length();
+		if (length == 0.0f)
+		{
+			return *this;
+		}
 		x /= length;
 		y /= length;
+
 
 		return *this;
 	}
@@ -161,6 +231,21 @@ namespace sg::math
 		
 		return Vector2(x, y);
 	}
+	inline static Vector2 RotateNoNormalize(Vector2 vec, float degree)
+	{
+		float radian = (degree / 180.0f) * PI;
+		float x = vec.x * cosf(radian) - vec.y * sinf(radian);
+		float y = vec.x * sinf(radian) + vec.y * cosf(radian);
+		return Vector2(x, y);
+	}
+	inline static float AngleInDegrees(Vector2 mydir)
+	{
+		float theta = atan2(mydir.y, mydir.x);
+		float angleInDegrees = theta * 180.0f / PI;
+		return angleInDegrees;
+		
+	}
+
 
 	inline static float Dot(Vector2& v1, Vector2& v2)
 	{
@@ -171,5 +256,9 @@ namespace sg::math
 	{
 		return v1.x * v2.y - v1.y * v2.x;
 	}
-}
 
+	float Lerp(float a, float b, float t)
+	{
+		return a + (b - a) * t;
+	}
+}

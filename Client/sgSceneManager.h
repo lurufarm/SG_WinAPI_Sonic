@@ -14,6 +14,18 @@ namespace sg
 
 		static void LoadScene(eSceneType type);
 		static Scene* GetActiveScene() { return mActiveScene; }
+		static eSceneType GetActiveScene2()
+		{
+			Scene* now = mActiveScene;
+
+			for (size_t i = 0; i < 5; i++)
+			{
+				if (now == mScenes[i])
+				{
+					return (eSceneType)i;
+				}
+			}
+		}
 		static void SetActiveScene(Scene* scene) { mActiveScene = scene; }
 		static Scene* SetScene(eSceneType type)
 		{
