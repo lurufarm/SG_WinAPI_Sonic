@@ -36,10 +36,11 @@ namespace sg
 	Ground::Ground()
 		: mbAble(false)
 		, mOnOff(true)
+		, mRed(false)
 		, mYellow(false)
 		, mGreen(false)
 		, mBlue(false)
-		, mRed(false)
+		, mOrange(false)
 		, mFrontpos(Vector2::Zero)
 
 	{
@@ -53,12 +54,6 @@ namespace sg
 	void Ground::Initialize()
 	{
 		mImage = Resources::Load<Image>(L"Ground_pixel", L"..\\Resources\\map\\pixel.bmp");
-
-		mYellow = false;
-		mGreen = false;
-		mBlue = false;
-		mRed = false;
-
 		GameObject::Initialize();
 	}
 
@@ -66,7 +61,7 @@ namespace sg
 	{
 		GameObject::Update();
 
-		if (Input::GetKeyDown(eKeyCode::Ctrl)) // Ctrl 누르면 Render On/Off
+		if (Input::GetKeyDown(eKeyCode::A)) // Ctrl 누르면 Render On/Off
 		{
 			if (mOnOff == true)
 			{
@@ -106,12 +101,12 @@ namespace sg
 		COLORREF myrightrightcolor = mImage->GetPixel(pos.x + 112.5, pos.y + 50);
 
 		COLORREF yellowloop = RGB(255, 255, 0);
-		COLORREF orangeloop = RGB(255, 255, 0);
+		COLORREF greenloop = RGB(127, 255, 0);
 		COLORREF blueloop = RGB(0, 0, 255);
+		COLORREF orangeloop = RGB(255, 127, 0);
 		COLORREF greyloop = RGB(100, 100, 100);
 		COLORREF redloop = RGB(80, 0, 0);
-		COLORREF greenloop = RGB(127, 255, 0);
-		//
+		COLORREF pinkloop = RGB(255, 127, 160);
 
 		for (GameObject* mon : SceneManager::GetActiveScene()->GetGameObjects(eLayerType::RMonster))
 		{
@@ -154,10 +149,11 @@ namespace sg
 		// --------------------------------------------- 플레이어의 발 아래, 머리 위, 옆이 땅일 때
 		if (myfootdowncolor != air
 			&& myfootdowncolor != NULL
-			&& myfootdowncolor != blueloop
 			&& myfootdowncolor != redloop
 			&& myfootdowncolor != greyloop
-			//&& myfootdowncolor != greenloop
+			&& myfootdowncolor != pinkloop
+			&& myfootdowncolor != blueloop
+			&& myfootdowncolor != orangeloop
 			&& mPlayer->GetSonicState() != Sonic::eSonicState::death)  // 현재 서 있는 곳이 땅일 경우 땅으로 인식하기
 		{
 			playerRb->SetFriction(250);
@@ -166,37 +162,27 @@ namespace sg
 			value = Vector2(pos.x + 62.5, pos.y + 122);
 			while (mImage->GetPixel(value.x, value.y) != air
 				&& mImage->GetPixel(value.x, value.y != NULL
-				&& mImage->GetPixel(value.x, value.y) != blueloop
-				&& mImage->GetPixel(value.x, value.y) != greenloop
 				&& mImage->GetPixel(value.x, value.y) != redloop
 				&& mImage->GetPixel(value.x, value.y) != greyloop
+				&& mImage->GetPixel(value.x, value.y) != pinkloop
+				&& mImage->GetPixel(value.x, value.y) != blueloop
+				&& mImage->GetPixel(value.x, value.y) != orangeloop
 				&& mPlayer->GetSonicState() != Sonic::eSonicState::death))
 			{
 				pos.y -= 1;
 				value.y -= 1;
 				playerTr->SetPos(pos);
 			}
-			value = Vector2(pos.x + 62.5, pos.y + 122);
-			while (mImage->GetPixel(value.x, value.y) == greenloop && mGreen == true)
-			{
-				pos.y -= 1;
-				value.y -= 1;
-				playerTr->SetPos(pos);
-			}
-			//while (mImage->GetPixel(value.x, value.y) == blueloop && mBlue == true)
-			//{
-			//	pos.y -= 1;
-			//	value.y -= 1;
-			//	playerTr->SetPos(pos);
-			//}
+
+
 		}
 		if (myupcolor != air
 			&& myupcolor != NULL
-			&& myupcolor != greyloop
 			&& myupcolor != redloop
-			&& myupcolor != yellowloop
-			&& myupcolor != greenloop
+			&& myupcolor != greyloop
+			&& myupcolor != pinkloop
 			&& myupcolor != blueloop
+			&& myupcolor != orangeloop
 			&& mPlayer->GetSonicState() != Sonic::eSonicState::death)  // 내 머리가 땅일 경우 땅으로 인식하기
 		{
 			playerRb->SetGround(false);
@@ -204,11 +190,11 @@ namespace sg
 			value = Vector2(pos.x + 62.5, pos.y + 20);
 			while (mImage->GetPixel(value.x, value.y) != air
 				&& mImage->GetPixel(value.x, value.y) != NULL
-				&& mImage->GetPixel(value.x, value.y) != yellowloop
-				&& mImage->GetPixel(value.x, value.y) != blueloop
-				&& mImage->GetPixel(value.x, value.y) != greyloop
 				&& mImage->GetPixel(value.x, value.y) != redloop
-				&& mImage->GetPixel(value.x, value.y) != greenloop
+				&& mImage->GetPixel(value.x, value.y) != greyloop
+				&& mImage->GetPixel(value.x, value.y) != pinkloop
+				&& mImage->GetPixel(value.x, value.y) != blueloop
+				&& mImage->GetPixel(value.x, value.y) != orangeloop
 
 
 				&& mPlayer->GetSonicState() != Sonic::eSonicState::death)
@@ -219,19 +205,13 @@ namespace sg
 
 			}
 
-			//while (mImage->GetPixel(value.x, value.y) == blueloop)
-			//{
-			//	pos.x += 1;				
-			//	value.x += 1;
-			//	playerTr->SetPos(pos);
-			//}
 		}
 		if (myleftcolor != air
 			&& myleftcolor != NULL
 			&& myleftcolor != greyloop
-			&& myleftcolor != redloop
-			&& myleftcolor != greenloop
-			&& myleftcolor != blueloop
+			&& myleftcolor != pinkloop
+			//&& myleftcolor != blueloop
+			&& myleftcolor != orangeloop
 			&& mPlayer->GetSonicState() != Sonic::eSonicState::death);
 		{
 			value = Vector2(pos.x + 32.5, pos.y + 50);
@@ -239,11 +219,13 @@ namespace sg
 			while (mImage->GetPixel(value.x, value.y) != air
 				&& mImage->GetPixel(value.x, value.y) != NULL
 				&& mImage->GetPixel(value.x, value.y) != RGB(0, 127, 0)
-				&& mImage->GetPixel(value.x, value.y) != greyloop
 				&& mImage->GetPixel(value.x, value.y) != redloop
+				&& mImage->GetPixel(value.x, value.y) != greyloop
+				&& mImage->GetPixel(value.x, value.y) != pinkloop
 				&& mImage->GetPixel(value.x, value.y) != yellowloop
-				&& mImage->GetPixel(value.x, value.y) != blueloop
 				&& mImage->GetPixel(value.x, value.y) != greenloop
+				&& mImage->GetPixel(value.x, value.y) != blueloop
+				&& mImage->GetPixel(value.x, value.y) != orangeloop
 				&& mPlayer->GetSonicState() != Sonic::eSonicState::death)
 			{
 				velocity.x = 0;
@@ -252,21 +234,20 @@ namespace sg
 				value.x += 1;
 				playerTr->SetPos(pos);
 			}
-			while (mImage->GetPixel(value.x, value.y) == yellowloop)
-
+			value = Vector2(pos.x + 32.5, pos.y + 50);
+			while (mImage->GetPixel(value.x, value.y) == yellowloop 
+				|| mImage->GetPixel(value.x, value.y) == greenloop)
 			{
 				pos.y += 1;
 				value.y += 1;
 				playerTr->SetPos(pos);
 			}
-			while (mImage->GetPixel(value.x, value.y) == blueloop)
-			{
-				pos.x += 1;
-				value.x += 1;
-				playerTr->SetPos(pos);
-			}
-			while (mImage->GetPixel(value.x, value.y) == RGB(0, 127, 0))
 
+			value = Vector2(pos.x + 32.5, pos.y + 50);
+			while (mImage->GetPixel(value.x, value.y) == blueloop
+				|| mImage->GetPixel(value.x, value.y) == redloop
+				|| mImage->GetPixel(value.x, value.y) == greenloop
+				|| mImage->GetPixel(value.x, value.y) == RGB(0, 127, 0))
 			{
 				pos.x += 1;
 				value.x += 1;
@@ -276,9 +257,9 @@ namespace sg
   		if (myrightcolor != air
 			&& myrightcolor != NULL
 			&& myrightcolor != blueloop
-			&& myrightcolor != greyloop
 			&& myrightcolor != redloop
-			&& myrightcolor != greenloop
+			&& myrightcolor != greyloop
+			&& myrightcolor != pinkloop
 			&& mPlayer->GetSonicState() != Sonic::eSonicState::death)// 내 오른쪽이 땅일 경우 땅으로 인식하기
 		{
 			value = Vector2(pos.x + 92.5, pos.y + 50);
@@ -286,11 +267,13 @@ namespace sg
 			while (mImage->GetPixel(value.x, value.y) != air
 				&& mImage->GetPixel(value.x, value.y) != NULL
 				&& mImage->GetPixel(value.x, value.y) != RGB(0, 127, 0)
-				&& mImage->GetPixel(value.x, value.y) != greyloop
 				&& mImage->GetPixel(value.x, value.y) != redloop
+				&& mImage->GetPixel(value.x, value.y) != greyloop
+				&& mImage->GetPixel(value.x, value.y) != pinkloop
 				&& mImage->GetPixel(value.x, value.y) != yellowloop
-				&& mImage->GetPixel(value.x, value.y) != blueloop
 				&& mImage->GetPixel(value.x, value.y) != greenloop
+				&& mImage->GetPixel(value.x, value.y) != blueloop
+				&& mImage->GetPixel(value.x, value.y) != orangeloop
 				&& mPlayer->GetSonicState() != Sonic::eSonicState::death)
 			{
 				velocity.x = 0;
@@ -300,10 +283,22 @@ namespace sg
 				playerTr->SetPos(pos);
 			}
 
-			while (mImage->GetPixel(value.x, value.y) == yellowloop || mImage->GetPixel(value.x, value.y) == RGB(0, 127, 0))
+			value = Vector2(pos.x + 92.5, pos.y + 50);
+			while (mImage->GetPixel(value.x, value.y) == yellowloop
+				|| mImage->GetPixel(value.x, value.y) == RGB(0, 127, 0)
+				|| mImage->GetPixel(value.x, value.y) == greenloop
+				|| (mImage->GetPixel(value.x, value.y) == orangeloop && mOrange))
 			{
 				pos.x -= 1;
 				value.x -= 1;
+				playerTr->SetPos(pos);
+			}
+
+			value = Vector2(pos.x + 92.5, pos.y + 50);
+			while (mImage->GetPixel(value.x, value.y) == blueloop)
+			{
+				pos.x += 1;
+				value.x += 1;
 				playerTr->SetPos(pos);
 			}
 
@@ -324,16 +319,18 @@ namespace sg
 
 			for (size_t i = 0; i < 114; i++)
 			{
-				if (mImage->GetPixel(pos.x + 82.5, pos.y + 20 + i) != air
-					&& mImage->GetPixel(pos.x + 82.5, pos.y + 20 + i) != NULL
-					&& mImage->GetPixel(pos.x + 82.5, pos.y + 20 + i) != greyloop
-					&& mImage->GetPixel(pos.x + 82.5, pos.y + 20 + i) != redloop
-					&& mImage->GetPixel(pos.x + 82.5, pos.y + 20 + i) != yellowloop
-					&& mImage->GetPixel(pos.x + 82.5, pos.y + 20 + i) != blueloop
-					&& mImage->GetPixel(pos.x + 82.5, pos.y + 20 + i) != greenloop
+				if (mImage->GetPixel(pos.x + 92.5, pos.y + 20 + i) != air
+					&& mImage->GetPixel(pos.x + 92.5, pos.y + 20 + i) != NULL
+					&& mImage->GetPixel(pos.x + 92.5, pos.y + 20 + i) != redloop
+					&& mImage->GetPixel(pos.x + 92.5, pos.y + 20 + i) != greyloop
+					&& mImage->GetPixel(pos.x + 92.5, pos.y + 20 + i) != pinkloop
+					&& mImage->GetPixel(pos.x + 92.5, pos.y + 20 + i) != yellowloop
+					&& mImage->GetPixel(pos.x + 92.5, pos.y + 20 + i) != greenloop
+					&& mImage->GetPixel(pos.x + 92.5, pos.y + 20 + i) != blueloop
+					&& mImage->GetPixel(pos.x + 92.5, pos.y + 20 + i) != orangeloop
 					)
 				{
-					if (i > 94)
+					if (i > 102)
 					{
 						mFrontpos = Vector2(1, 1).Nomalize();
 					}
@@ -359,16 +356,17 @@ namespace sg
 			}
 			for (size_t i = 0; i < 114; i++)
 			{
-				if (mImage->GetPixel(pos.x + 42.5, pos.y + 20 + i) != air
-					&& mImage->GetPixel(pos.x + 42.5, pos.y + 20 + i) != NULL
-					&& mImage->GetPixel(pos.x + 42.5, pos.y + 20 + i) != greyloop
-					&& mImage->GetPixel(pos.x + 42.5, pos.y + 20 + i) != redloop
-					&& mImage->GetPixel(pos.x + 42.5, pos.y + 20 + i) != yellowloop
-					&& mImage->GetPixel(pos.x + 42.5, pos.y + 20 + i) != blueloop
-					&& mImage->GetPixel(pos.x + 42.5, pos.y + 20 + i) != greenloop
-					)
+				if (mImage->GetPixel(pos.x + 32.5, pos.y + 20 + i) != air
+					&& mImage->GetPixel(pos.x + 32.5, pos.y + 20 + i) != NULL
+					&& mImage->GetPixel(pos.x + 32.5, pos.y + 20 + i) != redloop
+					&& mImage->GetPixel(pos.x + 32.5, pos.y + 20 + i) != greyloop
+					&& mImage->GetPixel(pos.x + 32.5, pos.y + 20 + i) != pinkloop
+					&& mImage->GetPixel(pos.x + 32.5, pos.y + 20 + i) != yellowloop
+					&& mImage->GetPixel(pos.x + 32.5, pos.y + 20 + i) != greenloop
+					&& mImage->GetPixel(pos.x + 32.5, pos.y + 20 + i) != blueloop
+					&& mImage->GetPixel(pos.x + 32.5, pos.y + 20 + i) != orangeloop)
 				{
-					if (i > 94)
+					if (i > 102)
 					{
 						mFrontpos = Vector2(-1, 1).Nomalize();
 					}
@@ -433,14 +431,9 @@ namespace sg
 			}
 		}
 
-		// ---------------------------------------------
+		// --------------------------------------------- 오른쪽 곡선(yellow일 때)
 		if (myrightcolor == yellowloop || myrightupcolor == yellowloop)
 		{
-			if (Input::GetKeyDown(eKeyCode::Space))
-			{
-				playerRb->SetGround(false);
-				playerRb->SetGravity(Vector2(0, 800));
-			}
 			for (size_t i = 0; i < 114; i++)
 			{
 				if (mImage->GetPixel(pos.x + 10 + i, pos.y + 50) == yellowloop)
@@ -448,96 +441,132 @@ namespace sg
 					mFrontpos = (Vector2(pos.x + 10 + i, pos.y + 50) - Vector2(pos.x + 92.5, pos.y + 123)).Nomalize();
 					playerRb->SetGravity(Vector2(mFrontpos.x, -1.0f * fabs(velocity.y * mFrontpos.y)));
 					playerRb->SetVelocity(Vector2(velocity.x, -1.0f * fabs(velocity.Length() * mFrontpos.y)));
+					playerRb->AddVelocity(Vector2(0, -50));
+				}
+			}
+		}
+		// --------------------------------------------- 360도 돌기
+		
+		if (myrightcolor == blueloop)
+		{
+			mGreen = true;
+			mOrange = true;
+			mPlayer->SetSonicState(Sonic::eSonicState::rolling_right);
+		}
+
+		if ((myrightcolor == orangeloop || myfootdowncolor == orangeloop) && mOrange)
+		{
+			mPlayer->SetSonicState(Sonic::eSonicState::rolling_right);
+
+			for (size_t i = 0; i < 114; i++)
+			{
+				if (mImage->GetPixel(pos.x + 10 + i, pos.y + 50) == orangeloop)
+				{
+					mFrontpos = (Vector2(pos.x + 10 + i, pos.y + 50) - Vector2(pos.x + 92.5, pos.y + 123)).Nomalize();
+					playerRb->SetGravity(Vector2(mFrontpos.x, -1.0f * fabs(velocity.y * mFrontpos.y)));
+					playerRb->SetVelocity(Vector2(velocity.x, -1.0f * fabs(velocity.Length() * mFrontpos.y)));
+					playerRb->AddVelocity(Vector2(0, -50));
+				}
+			}
+			if (myfootdowncolor == orangeloop && mOrange)
+			{
+				mPlayer->SetSonicState(Sonic::eSonicState::rolling_right);
+				value = Vector2(pos.x + 62.5, pos.y + 122);
+				while (mImage->GetPixel(value.x, value.y) == air)
+				{
+					pos.y -= 1;
+					value.y -= 1;
+					playerTr->SetPos(pos);
+				}
+			}
+		}
+
+		if ((myrightcolor == greenloop || myrightupcolor == greenloop) && mGreen)
+		{
+			mRed = true;
+			mPlayer->SetSonicState(Sonic::eSonicState::rolling_right);
+
+			for (size_t i = 0; i < 114; i++)
+			{
+				if (mImage->GetPixel(pos.x + 10 + i, pos.y + 50) == greenloop)
+				{
+					mFrontpos = (Vector2(pos.x + 10 + i, pos.y + 50) - Vector2(pos.x + 92.5, pos.y + 123)).Nomalize();
+					playerRb->SetGravity(Vector2(mFrontpos.x, -1.0f * fabs(velocity.y * mFrontpos.y)));
+					playerRb->SetVelocity(Vector2(velocity.x, -1.0f * fabs(velocity.Length() * mFrontpos.y)));
+					playerRb->AddVelocity(Vector2(-10, -20));
+				}
+			}
+		}
+
+		if ((myleftcolor == redloop || myleftleftcolor == redloop || myfootcolor == redloop) && mRed)
+		{
+			mPlayer->SetSonicState(Sonic::eSonicState::rolling_right);
+
+			for (size_t i = 0; i < 114; i++)
+			{
+				if (mImage->GetPixel(pos.x + 124 - i, pos.y + 30) == redloop)
+				{
+					mFrontpos = (Vector2(pos.x + 124 - i, pos.y + 30) - Vector2(pos.x + 62.5 , pos.y + 50)).Nomalize();
+					playerRb->SetGravity(Vector2(-1.0f * fabs(mFrontpos.x), -1.0f * fabs(velocity.y * mFrontpos.y)));
+					playerRb->SetVelocity(Vector2(-1.0f * fabs(velocity.x), -1.0f * fabs(velocity.Length() * mFrontpos.y)));
+					playerRb->AddVelocity(Vector2(-20, -10));
+				}
+			}
+		}
+		if (myfootcolor == greyloop || myfootdowncolor == greyloop || myrightcolor == greyloop)
+		{
+			mPlayer->SetSonicState(Sonic::eSonicState::rolling_right);
+			mGreen = false;
+			mOrange = false;
+			mRed = false;
+			for (size_t i = 0; i < 114; i++)
+			{
+				if (mImage->GetPixel(pos.x + 10 + i, pos.y + 123) == greyloop)
+				{
+					mFrontpos = Vector2(pos.x + 10 + i, pos.y + 123).Nomalize();
+					playerRb->SetGravity(Vector2(-1.0f * fabs(mFrontpos.x), fabs(velocity.y * mFrontpos.y)));
+					playerRb->SetVelocity(Vector2(-1.0f * fabs(velocity.x), fabs(velocity.Length() * mFrontpos.y)));
+					playerRb->AddVelocity(Vector2(-20, 10));
+				}
+			}
+		}
+
+		if (myleftupcolor == blueloop || myleftupcolor == blueloop)
+		{
+			mRed = false;
+			mPlayer->SetSonicState(Sonic::eSonicState::rolling_right);
+			for (size_t i = 0; i < 114; i++)
+			{
+				if (mImage->GetPixel(pos.x + 10 + i, pos.y + 60) == blueloop)
+				{
+					mFrontpos = Vector2(pos.x + 10 + i, pos.y + 60).Nomalize();
+					playerRb->SetGravity(Vector2(mFrontpos.x, fabs(velocity.y * mFrontpos.y)));
+					playerRb->SetVelocity(Vector2(velocity.x, fabs(velocity.Length() * mFrontpos.y)));
+					playerRb->AddVelocity(Vector2(0, 10));
 				}
 			}
 		}
 
 
-		//if (myfootcolor == greenloop && mGreen == true)
-		//{
-		//	value = Vector2(pos.x + 62.5, pos.y + 123);
-		//	while (mImage->GetPixel(value.x, value.y) != air && mGreen == true)
-		//	{
-		//		pos.y -= 1;
-		//		value.y -= 1;
-		//		playerTr->SetPos(pos);
-		//	}
+		if (myrightcolor == pinkloop || myupcolor == pinkloop)
+		{
+			mPlayer->SetSonicState(Sonic::eSonicState::rolling_right);
+			mFrontpos = (Vector2(0, 1)).Nomalize();
+			playerRb->SetGravity(Vector2(fabs(mFrontpos.x), fabs(velocity.y * mFrontpos.y)));
+			playerRb->SetVelocity(Vector2(fabs(velocity.x), fabs(velocity.Length() * mFrontpos.y)));
+			playerRb->AddVelocity(Vector2(30.0f, 10.0f));
+		}
 
-		//}
-		//
 
-		//if (myrightcolor == yellowloop && mYellow == true && myfootdowncolor != redloop)
-		//{
-		//	mGreen = false;
-		//	if (Input::GetKeyDown(eKeyCode::Space))
-		//	{
-		//		playerRb->SetGround(false);
-		//		playerRb->SetGravity(Vector2(0, 800));
-		//	}
-		//	for (size_t i = 0; i < 114; i++)
-		//	{
-		//		if (mImage->GetPixel(pos.x + 10 + i, pos.y + 50) == yellowloop)
-		//		{
-		//			mFrontpos = (Vector2(pos.x + 10 + i, pos.y + 50) - Vector2(pos.x + 92.5, pos.y + 123)).Nomalize();
-		//			//playerRb->SetGravity(Vector2(mFrontpos.x, -1.0f * fabs(velocity.y * mFrontpos.y)));
-		//			playerRb->SetVelocity(Vector2(velocity.x, -1.0f * fabs(velocity.Length() * mFrontpos.y)));
-		//		}
-		//	}
-		//}
+		if (myfootcolor == orangeloop || myfootcolor == blueloop)
+		{
+			mPlayer->SetSonicState(Sonic::eSonicState::rolling_right);
+		}
 
-		//if (myfootcolor == blueloop)
-		//{
-		//	mYellow = true;
-		//	mGreen = true;
-		//	if (Input::GetKeyDown(eKeyCode::Space)
-		//		&& mPlayer->GetSonicState() != Sonic::eSonicState::hang_left
-		//		&& mPlayer->GetSonicState() != Sonic::eSonicState::hang_right)
-		//	{
-		//		playerRb->SetGround(false);
-		//		playerRb->SetGravity(Vector2(0, 800));
-		//	}
-		//}
-		//
-		//if (myfootdowncolor == redloop)
-		//{
-		//	playerRb->AddVelocity(Vector2(-50.0f, -10.0f));
-		//	mFrontpos = Vector2(0, 800).Nomalize();
-		//	playerRb->SetGravity(Vector2(0, 800));
-		//	if (Input::GetKeyDown(eKeyCode::Space)
-		//		&& mPlayer->GetSonicState() != Sonic::eSonicState::hang_left
-		//		&& mPlayer->GetSonicState() != Sonic::eSonicState::hang_right)
-		//	{
-		//		playerRb->SetGround(false);
-		//		playerRb->SetGravity(Vector2(0, 800));
-		//	}
-		//}
 
-		//if (myrightrightcolor == greyloop || myleftcolor == greyloop || myrightcolor == greyloop || myupcolor == greyloop || myfootcolor == blueloop)
-		//{
-		//	playerRb->AddVelocity(Vector2(50.0f, 0.0f));
-		//	mFrontpos = Vector2(0, 800).Nomalize();
-		//	playerRb->SetGravity(Vector2(0, 800));
-		//	if (Input::GetKeyDown(eKeyCode::Space)
-		//		&& mPlayer->GetSonicState() != Sonic::eSonicState::hang_left
-		//		&& mPlayer->GetSonicState() != Sonic::eSonicState::hang_right)
-		//	{
-		//		playerRb->SetGround(false);
-		//		playerRb->SetGravity(Vector2(0, 800));
-		//	}
 
-		//}
 
-		//if (myrightcolor == yellowloop
-		//	|| myleftcolor == yellowloop
-		//	|| myrightupcolor == yellowloop
-		//	|| myleftupcolor == yellowloop
-		//	|| myleftcolor == blueloop
-		//	|| myfootdowncolor == redloop
-		//	|| myupcolor == greyloop)
-		//	{
-		//		mPlayer->SetSonicState(Sonic::eSonicState::rolling_right);
-		//}
-
+		// --------------------------------------------- SetGround(false)설정 1
 		if (Input::GetKeyDown(eKeyCode::Space)
 			&& mPlayer->GetSonicState() != Sonic::eSonicState::hang_left
 			&& mPlayer->GetSonicState() != Sonic::eSonicState::hang_right)
@@ -551,28 +580,29 @@ namespace sg
 			playerRb->SetGravity(Vector2(0, 800));
 		}
 
-
-
-
-
-
-
 		// --------------------------------------------- 오브젝트 위에 설 수 있음
 		for (GameObject* obj : mObject)
 		{
 			if (obj == nullptr)
 				continue;
 
-			if (obj->mUse == true)
+			else if (obj != nullptr && obj->mUse == true)
 			{
-				playerRb->SetGround(true);
-
 				if (dynamic_cast<Rope*>(obj))
 				{
+					playerRb->SetGround(true);
 					playerTr->SetPos(obj->GetComponent<Collider>()->GetPos());
+				}
+				else if (dynamic_cast<MapRock_l*>(obj))
+				{
+					if (dynamic_cast<MapRock_l*>(obj)->mOn == true)
+					{
+						playerRb->SetGround(true);
+					}
 				}
 				else
 				{
+					playerRb->SetGround(true);
 					value = Vector2(pos.x + 62.5, pos.y + 123);
 					while (obj->GetComponent<Collider>()->GetPos().y < value.y)
 					{
@@ -582,29 +612,6 @@ namespace sg
 					}
 				}
 			}
-			else if (obj->mUse == false)
-			{
-				if (obj->mUse == false && obj == dynamic_cast<MapRock_l*>(obj))
-				{
-					if (dynamic_cast<MapRock_l*>(obj)->mOn)
-					{
-
-						value = Vector2(pos.x + 62.5, pos.y + 123);
-						while (obj->GetComponent<Collider>()->GetPos().y < value.y)
-						{
-							pos.y -= 1;
-							value.y -= 1;
-							playerTr->SetPos(pos);
-						}
-					}
-				}
-				else
-				{
-
-				}
-			}
-			
-
 		}
 		// --------------------------------------------- 스프링
 		for (Spring* spring : mSpring)
@@ -617,7 +624,7 @@ namespace sg
 				playerRb->SetGround(false);
 			}
 		}
-		// --------------------------------------------- 점프 혹은 다치거나 죽었을 때
+		// --------------------------------------------- SetGround(false)설정 2 (점프 혹은 다치거나 죽었을 때)
 		if (Input::GetKeyDown(eKeyCode::Space)
 			|| Input::GetKey(eKeyCode::Space)
 			|| mPlayer->GetSonicState() == Sonic::eSonicState::hurt_left

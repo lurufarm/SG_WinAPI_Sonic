@@ -2,6 +2,7 @@
 #include "sgSonic.h"
 
 #include "sgImage.h"
+#include "sgSound.h"
 #include "sgResources.h"
 
 #include "sgTransform.h"
@@ -34,6 +35,8 @@ namespace sg
 		mAni->CreateAnimation(L"spike_4", spike, Vector2(96.0f, 0.0f), 4, 1, 1, Vector2::Zero, 1);
 		
 		mCol->SetSize(Vector2(80.0f, 80.0f));
+
+		sSpike = Resources::Load<Sound>(L"s_spike", L"..\\Resources\\sound\\sonic_spiked.wav");
 
 		GameObject::Initialize();
 	}
@@ -80,34 +83,43 @@ namespace sg
 
 		if (mSpikeState == eSpikeState::up)
 		{
-			if (mycolpos.y <= scolpos.y + 90
-				&& (mycolpos.x < scolpos.x + 27.5 && mycolpos.x + 80 > scolpos.x + 27.5)
+			if (mycolpos.y - (scolpos.y + 122) < 0 && mycolpos.y - (scolpos.y + 122) > -50
+				&& ((mycolpos.x < spos.x + 32.5 && mycolpos.x + 80 > spos.x + 32.5) || (mycolpos.x < spos.x + 92.5 && mycolpos.x + 80 > spos.x + 92.5))
 				&& sonic->GetHurt() == false)
 			{
-				if (mycolpos.x + 40 <= scolpos.x + 27.5)
+				if (mycolpos.x + 40 <= spos.x + 62.5)
 				{
+					sSpike->Play(false);
 					sonic->SetSonicState(Sonic::eSonicState::hurt_left);
 				}
 				else
 				{
+					sSpike->Play(false);
 					sonic->SetSonicState(Sonic::eSonicState::hurt_right);
 				}
 			}
-			else if (mycolpos.y < scolpos.y + 90)
+			else if (fabs(mycolpos.y + 80 - (scolpos.y + 122)) < 50
+				&& ((mycolpos.x + 80 <= spos.x + 32.5) || (mycolpos.x <= spos.x + 92.5)))
 			{
-				if (mycolpos.x + 40 < scolpos.x + 27.5)
+				if (mycolpos.x + 40 < spos.x + 62.5) // 캐릭터가 오른쪽
 				{
-					spos.x += 1;
-					str->SetPos(spos);
-					srbvel.x = 0;
-					srb->SetVelocity(srbvel);
+					float x = spos.x + 42.5;
+					while (x < mycolpos.x + 80)
+					{
+						spos.x += 1;
+						x += 1;
+						str->SetPos(spos);
+					}
 				}
-				else if (mycolpos.x + 40 > scolpos.x)
+				else if (mycolpos.x + 40 > spos.x + 62.5) //캐릭터가 왼쪽
 				{
-					spos.x -= 1;
-					str->SetPos(spos);
-					srbvel.x = 0;
-					srb->SetVelocity(srbvel);
+					float x = spos.x + 82.5;
+					while (x > mycolpos.x)
+					{
+						spos.x -= 1;
+						x -= 1;
+						str->SetPos(spos);
+					}
 				}
 			}
 		}
@@ -192,34 +204,44 @@ namespace sg
 
 		if (mSpikeState == eSpikeState::up)
 		{
-			if (mycolpos.y <= scolpos.y + 90
-				&& (mycolpos.x < scolpos.x + 27.5 && mycolpos.x + 80 > scolpos.x + 27.5)
+			if (mycolpos.y - (scolpos.y + 122) < 0 && mycolpos.y - (scolpos.y + 122) > -50
+				&& ((mycolpos.x < spos.x + 32.5 && mycolpos.x + 80 > spos.x + 32.5) || (mycolpos.x < spos.x + 92.5 && mycolpos.x + 80 > spos.x + 92.5))
 				&& sonic->GetHurt() == false)
 			{
-				if (mycolpos.x + 40 <= scolpos.x + 27.5)
+				if (mycolpos.x + 40 <= spos.x + 62.5)
 				{
+					sSpike->Play(false);
 					sonic->SetSonicState(Sonic::eSonicState::hurt_left);
 				}
 				else
 				{
+					sSpike->Play(false);
 					sonic->SetSonicState(Sonic::eSonicState::hurt_right);
 				}
 			}
-			else if (mycolpos.y < scolpos.y + 90)
+			else if (fabs(mycolpos.y + 80 - (scolpos.y + 122)) < 50
+				&& ((mycolpos.x + 80 <= spos.x + 32.5) || (mycolpos.x <= spos.x + 92.5)))
 			{
-				if (mycolpos.x + 40 < scolpos.x + 27.5)
+				if (mycolpos.x + 40 < spos.x + 62.5) // 캐릭터가 오른쪽
 				{
-					spos.x += 1;
-					str->SetPos(spos);
-					srbvel.x = 0;
-					srb->SetVelocity(srbvel);
+					float x = spos.x + 42.5;
+					while (x < mycolpos.x + 80)
+					{
+						spos.x += 1;
+						x += 1;
+						str->SetPos(spos);
+					}
 				}
-				else if (mycolpos.x + 40 > scolpos.x)
+				else if (mycolpos.x + 40 > spos.x + 62.5) //캐릭터가 왼쪽
 				{
-					spos.x -= 1;
-					str->SetPos(spos);
-					srbvel.x = 0;
-					srb->SetVelocity(srbvel);
+					float x = spos.x + 82.5;
+
+					while (x > mycolpos.x)
+					{
+						spos.x -= 1;
+						x -= 1;
+						str->SetPos(spos);
+					}
 				}
 			}
 		}

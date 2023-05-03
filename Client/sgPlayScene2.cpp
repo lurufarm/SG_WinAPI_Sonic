@@ -15,6 +15,7 @@
 #include "sgRhinobot.h"
 #include "sgBloominator.h"
 #include "sgCaterkiller.h"
+#include "sgSpike.h"
 
 #include "sgRedcard.h"
 #include "sgAct1.h"
@@ -24,9 +25,16 @@
 #include "sgLogplatform.h"
 #include "sgMovingTerrain.h"
 #include "sgBreakingterrain.h"
+#include "sgWaterfallRock.h"
+
+#include "sgMapRock_l.h"
+#include "sgRope.h"
 #include "sgSpring.h"
 #include "sgButton.h"
 #include "sgWater.h"
+#include "sgGiantring.h"
+#include "sgRing.h"
+#include "sgItem.h"
 
 #include "sgTime.h"
 #include "sgObject.h"
@@ -59,8 +67,7 @@ namespace sg
 	}
 	void PlayScene2::Initialize()
 	{
-		mSonic2 = object::Instantiate<Sonic>(Vector2(300.0f, 1600.0f), eLayerType::Player, eSceneType::Play2);
-		//Camera::SetTarget(mSonic2);
+		mSonic2 = object::Instantiate<Sonic>(Vector2(14300.0f, 1500.0f), eLayerType::Player, eSceneType::Play2);
 		mBG = Resources::Load<Sound>(L"PlayTheme2", L"..\\Resources\\sound\\music\\act2bg.wav");
 
 		Background2* bg2_3 = object::Instantiate<Background2>(eLayerType::BG, eSceneType::Play2);
@@ -80,7 +87,7 @@ namespace sg
 		bg2_3_4->SetBG(Background2::eBGState::bg3, Vector2(280.0f, 1080.0f));
 		bg2_2_2->SetBG(Background2::eBGState::bg2, Vector2(280.0f, 1220.0f));
 		Foreground2* fg = object::Instantiate<Foreground2>(Vector2(4400, 2530), eLayerType::ForeObject, eSceneType::Play2);
-		mTrees = object::Instantiate<Foreground2>(Vector2(23587, 980), eLayerType::hideObjects, eSceneType::Play2);
+		mTrees = object::Instantiate<Foreground2>(Vector2(23387, 980), eLayerType::hideObjects, eSceneType::Play2);
 		mTrees->mAniN = true;
 
 		//----------------------------------- Map
@@ -108,21 +115,20 @@ namespace sg
 		MapDeco5* mdec9 = object::Instantiate<MapDeco5>(Vector2(13915, 1040), eLayerType::MapDeco, eSceneType::Play2);
 		mdec8->mNumber = true;
 		mdec9->mNumber = true;
-		//----------------------------------- MapDeco
+		//----------------------------------- 
 
 		//----------------------------------- Objects
+		MapRock_l* rock1 = object::Instantiate<MapRock_l>(Vector2(680, 1940), eLayerType::MapObjects, eSceneType::Play2);
+		MapRock_l* rock2 = object::Instantiate<MapRock_l>(Vector2(6400, 3950), eLayerType::MapObjects, eSceneType::Play2);
+		MapRock_l* rock3 = object::Instantiate<MapRock_l>(Vector2(8055, 720), eLayerType::MapObjects, eSceneType::Play2);
+
 		Water* water2 = object::WaterInstantiate(Vector2(6165.0f, 3910.0f), Vector2(645.0f, 500.0f), eLayerType::Water, eSceneType::Play2);
 
 		Logplatform* logp1 = object::Instantiate<Logplatform>(Vector2(6110, 1315), eLayerType::MapObjects, eSceneType::Play2);
-		Logplatform* logp2 = object::Instantiate<Logplatform>(Vector2(6110, 1543), eLayerType::MapObjects, eSceneType::Play2);
-		Logplatform* logp3 = object::Instantiate<Logplatform>(Vector2(6110, 1771), eLayerType::MapObjects, eSceneType::Play2);
-		Logplatform* logp4 = object::Instantiate<Logplatform>(Vector2(6110, 1999), eLayerType::MapObjects, eSceneType::Play2);
-		Logplatform* logp5 = object::Instantiate<Logplatform>(Vector2(6110, 2227), eLayerType::MapObjects, eSceneType::Play2);
-		Logplatform* logp6 = object::Instantiate<Logplatform>(Vector2(6110, 2455), eLayerType::MapObjects, eSceneType::Play2);
-		Logplatform* logp7 = object::Instantiate<Logplatform>(Vector2(6110, 2683), eLayerType::MapObjects, eSceneType::Play2);
-		Logplatform* logp8 = object::Instantiate<Logplatform>(Vector2(6110, 2911), eLayerType::MapObjects, eSceneType::Play2);
-		Logplatform* logp9 = object::Instantiate<Logplatform>(Vector2(6110, 3139), eLayerType::MapObjects, eSceneType::Play2);
-		Logplatform* logp10 = object::Instantiate<Logplatform>(Vector2(6110, 3367), eLayerType::MapObjects, eSceneType::Play2);
+		Logplatform* logp2 = object::Instantiate<Logplatform>(Vector2(6110, 1532), eLayerType::MapObjects, eSceneType::Play2);
+		Logplatform* logp3 = object::Instantiate<Logplatform>(Vector2(6110, 1749), eLayerType::MapObjects, eSceneType::Play2);
+		Logplatform* logp4 = object::Instantiate<Logplatform>(Vector2(6110, 1966), eLayerType::MapObjects, eSceneType::Play2);
+		Logplatform* logp5 = object::Instantiate<Logplatform>(Vector2(6110, 2183), eLayerType::MapObjects, eSceneType::Play2);
 
 		Breakingterrain* bterr1 = object::Instantiate<Breakingterrain>(Vector2(3920, 2765), eLayerType::MapObjects, eSceneType::Play2);
 		Breakingterrain* bterr2 = object::Instantiate<Breakingterrain>(Vector2(6160, 3700), eLayerType::MapObjects, eSceneType::Play2);
@@ -130,18 +136,75 @@ namespace sg
 		bterr3->SetDir(true);
 		Breakingterrain* bterr4 = object::Instantiate<Breakingterrain>(Vector2(6410, 1310), eLayerType::MapObjects, eSceneType::Play2);
 		bterr4->SetDir(true);
-		//Camera::SetTarget(bterr4);
 
+		WaterfallRock* wfr1 = object::Instantiate< WaterfallRock>(Vector2(6250, 3510), eLayerType::MapObjects, eSceneType::Play2);
+		WaterfallRock* wfr2 = object::Instantiate< WaterfallRock>(Vector2(6400, 3300), eLayerType::MapObjects, eSceneType::Play2);
 
 		Spring* spring1 = object::springInstantiate(Vector2(7370, 3090), eLayerType::hideObjects, eSceneType::Play2, 0);
+		Spring* spring2 = object::springInstantiate(Vector2(7125, 2740), eLayerType::hideObjects, eSceneType::Play2, 0);
+		Spring* spring3 = object::springInstantiate(Vector2(7205, 2740), eLayerType::hideObjects, eSceneType::Play2, 0);
+
+		Rope* rope = object::Instantiate<Rope>(Vector2(7150, 2000), eLayerType::MapObjects, eSceneType::Play2);
 
 		Logbridge* logb1 = object::Instantiate<Logbridge>(Vector2(27400.0f, 1265.0f), eLayerType::MapObjects, eSceneType::Play2);
 		logb = object::Instantiate<Logbridge>(Vector2(28675.0f, -3000.0f), eLayerType::MapObjects, eSceneType::Play2);
 		mButton = object::Instantiate<Button>(Vector2(29220.0f, 970.0f), eLayerType::Player, eSceneType::Play2);
 
+		Spike* spike1 = object::Instantiate<Spike>(Vector2(7200.0f, 1160.0f), eLayerType::hideObjects, eSceneType::Play2);
+		Spike* spike2 = object::Instantiate<Spike>(Vector2(7780.0f, 840.0f), eLayerType::hideObjects, eSceneType::Play2);
+
+
+		//----------------------------------- 
+		
+		Item* item_thunder1 = object::itemInstantiate(Vector2(470, 2060), eLayerType::Item, eSceneType::Play2, 2);
+		Item* item_fire1 = object::itemInstantiate(Vector2(7420.0f, 600.0f), eLayerType::Item, eSceneType::Play2, 1);
+
+		//----------------------------------- Ring
+		Ring* ring1 = object::Instantiate<Ring>(Vector2(840, 2080), eLayerType::Ring, eSceneType::Play2);
+		Ring* ring2 = object::Instantiate<Ring>(Vector2(910, 2080), eLayerType::Ring, eSceneType::Play2);
+		Ring* ring3 = object::Instantiate<Ring>(Vector2(980, 2080), eLayerType::Ring, eSceneType::Play2);
+
+		Ring* ring4 = object::Instantiate<Ring>(Vector2(3110, 2720), eLayerType::Ring, eSceneType::Play2);
+		Ring* ring5 = object::Instantiate<Ring>(Vector2(3270, 2720), eLayerType::Ring, eSceneType::Play2);
+		Ring* ring6 = object::Instantiate<Ring>(Vector2(3430, 2720), eLayerType::Ring, eSceneType::Play2);
+		Ring* ring7 = object::Instantiate<Ring>(Vector2(3590, 2720), eLayerType::Ring, eSceneType::Play2);
+		Ring* ring8 = object::Instantiate<Ring>(Vector2(3750, 2720), eLayerType::Ring, eSceneType::Play2);
+
+		Giantring* Gring1 = object::Instantiate<Giantring>(Vector2(4770, 2610), eLayerType::Ring, eSceneType::Play2);
+
+		Ring* ring9 = object::Instantiate<Ring>(Vector2(4310, 3280), eLayerType::Ring, eSceneType::Play2);
+		Ring* ring10 = object::Instantiate<Ring>(Vector2(4380, 3280), eLayerType::Ring, eSceneType::Play2);
+		Ring* ring11 = object::Instantiate<Ring>(Vector2(4450, 3280), eLayerType::Ring, eSceneType::Play2);
+
+		Ring* ring12 = object::Instantiate<Ring>(Vector2(6625, 4040), eLayerType::Ring, eSceneType::Play2);
+		Ring* ring13 = object::Instantiate<Ring>(Vector2(6705, 3980), eLayerType::Ring, eSceneType::Play2);
+		Ring* ring14 = object::Instantiate<Ring>(Vector2(6745, 3880), eLayerType::Ring, eSceneType::Play2);
+
+		Giantring* Gring2 = object::Instantiate<Giantring>(Vector2(7345, 3640), eLayerType::Ring, eSceneType::Play2);
+
+		Ring* ring15 = object::Instantiate<Ring>(Vector2(7000, 3110), eLayerType::Ring, eSceneType::Play2);
+		Ring* ring16 = object::Instantiate<Ring>(Vector2(7070, 3110), eLayerType::Ring, eSceneType::Play2);
+		Ring* ring17 = object::Instantiate<Ring>(Vector2(7140, 3110), eLayerType::Ring, eSceneType::Play2);
+		Ring* ring18 = object::Instantiate<Ring>(Vector2(7210, 3110), eLayerType::Ring, eSceneType::Play2);
+
+		Ring* ring19 = object::Instantiate<Ring>(Vector2(7580, 1175), eLayerType::Ring, eSceneType::Play2);
+		Ring* ring20 = object::Instantiate<Ring>(Vector2(7650, 1130), eLayerType::Ring, eSceneType::Play2);
+		Ring* ring21 = object::Instantiate<Ring>(Vector2(7700, 1065), eLayerType::Ring, eSceneType::Play2);
+
+		Ring* ring22 = object::Instantiate<Ring>(Vector2(8200, 860), eLayerType::Ring, eSceneType::Play2);
+		Ring* ring23 = object::Instantiate<Ring>(Vector2(8270, 860), eLayerType::Ring, eSceneType::Play2);
+		Ring* ring24 = object::Instantiate<Ring>(Vector2(8340, 860), eLayerType::Ring, eSceneType::Play2);
+
+		Ring* ring25 = object::Instantiate<Ring>(Vector2(13540, 985), eLayerType::Ring, eSceneType::Play2);
+		Ring* ring26 = object::Instantiate<Ring>(Vector2(13610, 985), eLayerType::Ring, eSceneType::Play2);
+		Ring* ring27 = object::Instantiate<Ring>(Vector2(13680, 985), eLayerType::Ring, eSceneType::Play2);
+
 		//----------------------------------- Monster
 		Bloominator* bloom1 = object::Instantiate<Bloominator>(Vector2(7420.0f, 630.0f), eLayerType::hideMonster, eSceneType::Play2);
 		bloom1->SetSonic(mSonic2);
+
+		Rhinobot* rhino1 = object::Instantiate<Rhinobot>(Vector2(5600, 3680), eLayerType::RMonster, eSceneType::Play2);
+		rhino1->SetSonic(mSonic2);
 		Caterkiller* ck1 = object::Instantiate<Caterkiller>(Vector2(7320.0f, 2380.0f), eLayerType::Monster, eSceneType::Play2);
 		Caterkiller* ck2 = object::Instantiate<Caterkiller>(Vector2(6400.0f, 3930.0f), eLayerType::Monster, eSceneType::Play2);
 		mLB = object::Instantiate<Lastboss>(Vector2(27500.0f, 1000.0f), eLayerType::Boss, eSceneType::Play2);
@@ -150,6 +213,11 @@ namespace sg
 		mBombermove = Resources::Load<Sound>(L"bomber", L"..\\Resources\\sound\\bomber_move.wav");
 		mLBmove = Resources::Load<Sound>(L"LB_move-in-forest", L"..\\Resources\\sound\\lb_move-in-forest.wav");
 		mLBBG = Resources::Load<Sound>(L"LBTheme", L"..\\Resources\\sound\\music\\lastboss.wav");
+		//----------------------------------- 
+
+
+
+
 		Ground2* ground2 = object::Instantiate<Ground2>(eLayerType::Ground, eSceneType::Play2);
 		ground2->SetPlayer(mSonic2);
 		ground2->AddGameObject(logb1);
@@ -163,19 +231,16 @@ namespace sg
 		ground2->AddGameObject(logp3);
 		ground2->AddGameObject(logp4);
 		ground2->AddGameObject(logp5);
-		ground2->AddGameObject(logp6);
-		ground2->AddGameObject(logp7);
-		ground2->AddGameObject(logp8);
-		ground2->AddGameObject(logp9);
-		ground2->AddGameObject(logp10);
+		ground2->AddGameObject(wfr1);
+		ground2->AddGameObject(wfr2);
+		ground2->AddGameObject(rock2);
 		ground2->AddSpring(spring1);
+		ground2->AddSpring(spring2);
+		ground2->AddSpring(spring3);
 
-		//Camera::SetTarget(ck2);
 
 		PlayUI* ui = object::Instantiate<PlayUI>(eLayerType::UI, eSceneType::Play2);
 		ui->SetTarget(mSonic2);
-
-
 
 	}
 	void PlayScene2::Update()
@@ -240,13 +305,13 @@ namespace sg
 			Vector2 mTreespos = mTrees->GetComponent<Transform>()->GetPos();
 		if (mSonic2->GetComponent<Transform>()->GetPos().x >= 23000.0f)
 		{
-			mTreespos.x += 200 * Time::DeltaTime();
+			mTreespos.x += 150 * Time::DeltaTime();
 			mTrees->GetComponent<Transform>()->SetPos(mTreespos);
 
 		}
-		if (mTreespos.x >= 24600)
+		if (mTreespos.x >= 24300)
 		{
-			mTreespos.x = 24600;
+			mTreespos.x = 24300;
 			mTrees->GetComponent<Transform>()->SetPos(mTreespos);
 		}
 		if (mSonic2->GetComponent<Transform>()->GetPos().x >= 27600.0f && mLB->mStart == false)
@@ -257,18 +322,19 @@ namespace sg
 			object::Destroy(mLBr);
 			mLB->mStart = true;
 		}
-		if (mLB->GetComponent<Transform>()->GetPos().y > 2000 && mLB->mStart == true)
+		if (mLB->GetComponent<Transform>()->GetPos().y > 2000 && mLB->mStart == true && mKnuc == false)
 		{
 			mLBBG->Stop(false);
-			mBG->Play(true);
 			logb->GetComponent<Transform>()->SetPos(Vector2(28675.0f, 1265.0f));
-			mLB->mStart = false;
 		}
 		if (mSonic2->GetComponent<Transform>()->GetPos().x >= 28775.0f && logb->GetComponent<Transform>()->GetPos().y > 1200.0f && mKnuc == false)
 		{
+			mBG->Play(true);
 			Knuckles* kn = object::Instantiate<Knuckles>(Vector2(29900, 880), eLayerType::Monster, eSceneType::Play2);
 			mKnuc = true;
 		}
+
+
 		if (mButton->mPush)
 		{
 			logb->GetComponent<Animator>()->Play(L"logb_breaking", false);
@@ -322,10 +388,6 @@ namespace sg
 		Act1* act2 = object::Instantiate<Act1>(eLayerType::UI, eSceneType::Play2);
 
 		mBG->Play(true);
-
-
-		//Camera::SetTarget(mSonic2);
-
 
 	}
 	void PlayScene2::OnExit()

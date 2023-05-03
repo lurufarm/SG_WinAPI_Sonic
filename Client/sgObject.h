@@ -5,6 +5,7 @@
 #include "sgMapObjects2.h"
 #include "sgWater.h"
 #include "sgLBEffect.h"
+#include "sgClouds.h"
 
 #include "sgScene.h"
 #include "sgSceneManager.h"
@@ -88,6 +89,24 @@ namespace sg::object
 		lbe->Initialize();
 		return lbe;
 	}
+
+	static inline Clouds* CloudsInstantiate(int x, int Cnum, eSceneType type)
+	{
+		Clouds* cl = new Clouds(Cnum);
+		Scene* scene = SceneManager::SetScene(type);
+		scene->AddGameObject(cl, eLayerType::BG);
+		Vector2 pos;
+		pos.x = rand() % 500 + (x + 500);
+		pos.y = rand() % 800 + 1200;
+		if (SceneManager::GetActiveScene2() == eSceneType::Ending)
+		{
+			pos.y = rand() % 100 + -100;
+		}
+		cl->GameObject::GetComponent<Transform>()->SetPos(pos);
+		cl->Initialize();
+		return cl;
+	}
+
 
 
 	static void Destroy(GameObject* obj)

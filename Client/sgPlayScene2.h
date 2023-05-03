@@ -20,7 +20,7 @@ namespace sg
 
 	private:
 
-		Sonic* mSonic2;
+		//Sonic* mSonic2;
 		Bomber* mBomber;
 		class Lastboss* mLB;
 		class LastbossR* mLBr;

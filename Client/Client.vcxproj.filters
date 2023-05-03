@@ -373,6 +373,15 @@
     <ClInclude Include="sgWatersplash.h">
       <Filter>Contents\MapObjects</Filter>
     </ClInclude>
+    <ClInclude Include="sgClouds.h">
+      <Filter>Contents\MapObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="sgGiantring.h">
+      <Filter>Contents\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="sgWaterfallRock.h">
+      <Filter>Contents\MapObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sgMath.cpp">
@@ -618,9 +627,6 @@
     <ClCompile Include="sgButton.cpp">
       <Filter>Contents\MapObjects</Filter>
     </ClCompile>
-    <ClCompile Include="sgEndingScene.cpp">
-      <Filter>Contents\0.Scene</Filter>
-    </ClCompile>
     <ClCompile Include="sgEndST.cpp">
       <Filter>Contents\4.EndingScene</Filter>
     </ClCompile>
@@ -634,6 +640,18 @@
       <Filter>Engine\Resource</Filter>
     </ClCompile>
     <ClCompile Include="sgWatersplash.cpp">
+      <Filter>Contents\MapObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="sgClouds.cpp">
+      <Filter>Contents\MapObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="sgGiantring.cpp">
+      <Filter>Contents\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="sgEndingScene.cpp">
+      <Filter>Contents\0.Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="sgWaterfallRock.cpp">
       <Filter>Contents\MapObjects</Filter>
     </ClCompile>
   </ItemGroup>

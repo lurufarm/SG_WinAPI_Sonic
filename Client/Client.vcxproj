@@ -145,6 +145,7 @@
     <ClInclude Include="sgButton.h" />
     <ClInclude Include="sgCamera.h" />
     <ClInclude Include="sgCaterkiller.h" />
+    <ClInclude Include="sgClouds.h" />
     <ClInclude Include="sgCollider.h" />
     <ClInclude Include="sgCollisionManager.h" />
     <ClInclude Include="sgEffect.h" />
@@ -153,6 +154,7 @@
     <ClInclude Include="sgEndST.h" />
     <ClInclude Include="sgEnemyEffect.h" />
     <ClInclude Include="sgForeground2.h" />
+    <ClInclude Include="sgGiantring.h" />
     <ClInclude Include="sgGround2.h" />
     <ClInclude Include="sgItem.h" />
     <ClInclude Include="sgForeground.h" />
@@ -195,6 +197,7 @@
     <ClInclude Include="sgTitleUI.h" />
     <ClInclude Include="sgWall.h" />
     <ClInclude Include="sgWater.h" />
+    <ClInclude Include="sgWaterfallRock.h" />
     <ClInclude Include="sgWatersplash.h" />
     <ClInclude Include="sgZone1.h" />
     <ClInclude Include="targetver.h" />
@@ -242,12 +245,14 @@
     <ClCompile Include="sgButton.cpp" />
     <ClCompile Include="sgCamera.cpp" />
     <ClCompile Include="sgCaterkiller.cpp" />
+    <ClCompile Include="sgClouds.cpp" />
     <ClCompile Include="sgEffect.cpp" />
     <ClCompile Include="sgEffect2.cpp" />
     <ClCompile Include="sgEndingScene.cpp" />
     <ClCompile Include="sgEndST.cpp" />
     <ClCompile Include="sgEnemyEffect.cpp" />
     <ClCompile Include="sgForeground2.cpp" />
+    <ClCompile Include="sgGiantring.cpp" />
     <ClCompile Include="sgGround2.cpp" />
     <ClCompile Include="sgItem.cpp" />
     <ClCompile Include="sgForeground.cpp" />
@@ -314,6 +319,7 @@
     <ClCompile Include="sgWater.cpp" />
     <ClCompile Include="sgWatersplash.cpp" />
     <ClCompile Include="sgZone1.cpp" />
+    <ClCompile Include="sgWaterfallRock.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc" />

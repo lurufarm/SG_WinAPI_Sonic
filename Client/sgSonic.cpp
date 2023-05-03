@@ -6,6 +6,7 @@
 #include "sgCaterkiller.h"
 #include "sgEnemyEffect.h"
 #include "sgRing.h"
+#include "sgGiantring.h"
 #include "sgRope.h"
 #include "sgSpring.h"
 #include "sgMapRock_l.h"
@@ -51,6 +52,7 @@ namespace sg
 
 	Sonic::Sonic()
 		: mTime(0.0f)
+		, mHurtTime(0.0f)
 		, mbHurt(false)
 		, mSonicVelocity(Vector2::Zero)
 		, mR(false)
@@ -72,6 +74,7 @@ namespace sg
 		Transform* tr = GetComponent<Transform>();
 		tr->SetScale(Vector2(2.5f, 2.5f));
 		mAnimator = AddComponent<Animator>();
+		mCollider = AddComponent<Collider>();
 		mRigidbody = AddComponent<Rigidbody>();
 
 		sJump = Resources::Load<Sound>(L"Sonic_s_jump", L"..\\Resources\\sound\\sonic_jump.wav");
@@ -116,7 +119,6 @@ namespace sg
 		mAnimator->CreateAnimation(L"Sonic_fall_down", sonicimg, Vector2(200, 700), 16, 20, 2, Vector2::Zero, 0.15);
 
 
-		mCollider = AddComponent<Collider>();
 		mRigidbody->SetMass(0.3);
 
 		mLimitVel = 800.0f;
@@ -140,6 +142,8 @@ namespace sg
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::mEffect, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Bullet, true);
+
+		//mResetPos = tr->GetPos();
 
 		GameObject::Initialize();
 	}
@@ -369,13 +373,13 @@ namespace sg
 		}
 		if (mbHurt == true)
 		{
-			mTime += Time::DeltaTime();
+			mHurtTime += Time::DeltaTime();
 
-			if (mTime >= 2.0f)
-			{
-				mbHurt = false;
-				mTime = 0.0f;
-			} 
+		}
+		if (mHurtTime >= 2.0f)
+		{
+			mbHurt = false;
+			mHurtTime = 0.0f;
 		}
 
 	}
@@ -391,6 +395,7 @@ namespace sg
 	void Sonic::OnCollisionEnter(Collider* other)
 	{
 		Ring* ring = dynamic_cast<Ring*>(other->GetOwner());
+		Giantring* Gring = dynamic_cast<Giantring*>(other->GetOwner());
 		Rope* rope = dynamic_cast<Rope*>(other->GetOwner());
 		MapRock_l* maprockl = dynamic_cast<MapRock_l*>(other->GetOwner());
 		Spring* spring = dynamic_cast<Spring*>(other->GetOwner());
@@ -403,6 +408,7 @@ namespace sg
 
 		Transform* mytr = GetComponent<Transform>();
 		Vector2 mypos = GetComponent<Transform>()->GetPos();
+		Vector2 mycolpos = mCollider->GetPos();
 
 		if (other->GetOwner() == nullptr)
 		{
@@ -414,25 +420,37 @@ namespace sg
 			mRings++;
 		}
 		
+		if (other->GetOwner() == Gring)
+		{
+			mRings += 50;
+		}
+
 		if (other->GetOwner() == maprockl)
 		{
 			if (mSonicState != eSonicState::rolling_left
 				&& mSonicState != eSonicState::rolling_right)
 			{
-				//mSonicVelocity.x = 0;
-				//mRigidbody->SetVelocity(mSonicVelocity);
-
-				if (mypos.x + 100 > maprockl->GetComponent<Transform>()->GetPos().x
-					&& maprockl->mOn == false)
+				if (mypos.x + 62.5 > maprockl->GetComponent<Transform>()->GetPos().x + 60
+					&& maprockl->mOn == false) // 캐릭터가 오른쪽
 				{
-					mypos.x -= 3;
-					mytr->SetPos(mypos);
+					float x = mypos.x + 42.5;
+					while (x < maprockl->GetComponent<Transform>()->GetPos().x + 120 && maprockl->mOn == false)
+					{
+						mypos.x += 1;
+						x += 1;
+						mytr->SetPos(mypos);
+					}
 				}
-				if (mypos.x + 20 < maprockl->GetComponent<Transform>()->GetPos().x + 120
-					&& maprockl->mOn == false)
+				else if (mypos.x + 62.5 < maprockl->GetComponent<Transform>()->GetPos().x + 60
+					&& maprockl->mOn == false) // 캐릭터가 왼쪽
 				{
-					mypos.x += 3;
-					mytr->SetPos(mypos);
+					float x = mypos.x + 82.5;
+					while (x > maprockl->GetComponent<Transform>()->GetPos().x && maprockl->mOn == false)
+					{
+						mypos.x -= 1;
+						x -= 1;
+						mytr->SetPos(mypos);
+					}
 				}
 			}
 		}
@@ -564,6 +582,7 @@ namespace sg
 	{
 		Transform* mytr = GetComponent<Transform>();
 		Vector2 mypos = mytr->GetPos();
+		Vector2 mycolpos = mCollider->GetPos();
 		MapRock_l* maprockl = dynamic_cast<MapRock_l*>(other->GetOwner());
 		Rope* rope = dynamic_cast<Rope*>(other->GetOwner());
 		MovingTerrain* movter = dynamic_cast<MovingTerrain*>(other->GetOwner());
@@ -583,17 +602,27 @@ namespace sg
 			if (mSonicState != eSonicState::rolling_left
 				&& mSonicState != eSonicState::rolling_right)
 			{
-				if (mypos.x + 100 > maprockl->GetComponent<Transform>()->GetPos().x
-					&& maprockl->mOn == false)
+				if (mypos.x + 62.5 > maprockl->GetComponent<Transform>()->GetPos().x + 60
+					&& maprockl->mOn == false) // 캐릭터가 오른쪽
 				{
-					mypos.x += 5;
-					mytr->SetPos(mypos);
+					float x = mypos.x + 42.5;
+					while (x < maprockl->GetComponent<Transform>()->GetPos().x + 120 && maprockl->mOn == false)
+					{
+						mypos.x += 1;
+						x += 1;
+						mytr->SetPos(mypos);
+					}
 				}
-				if (mypos.x + 20 < maprockl->GetComponent<Transform>()->GetPos().x + 120
-					&& maprockl->mOn == false)
+				else if (mypos.x + 62.5 < maprockl->GetComponent<Transform>()->GetPos().x + 60
+					&& maprockl->mOn == false) // 캐릭터가 왼쪽
 				{
-					mypos.x -= 5;
-					mytr->SetPos(mypos);
+					float x = mypos.x + 82.5;
+					while (x > maprockl->GetComponent<Transform>()->GetPos().x && maprockl->mOn == false)
+					{
+						mypos.x -= 1;
+						x -= 1;
+						mytr->SetPos(mypos);
+					}
 				}
 			}
 		}
@@ -1577,7 +1606,7 @@ namespace sg
 		{
 			mLife--;
 			mTime = 0.0f;
-			Sonic::Sonic::Initialize();
+			Sonic::SonicReset();
 		};
 	}
 	void Sonic::hang_left()
@@ -1704,8 +1733,6 @@ namespace sg
 			mRigidbody->AddVelocity(Vector2(-50.0f, 0.0f));
 			mSonicState = eSonicState::walk_left;
 		}
-
-		//mWaterJump = false;
 
 	}
 	void Sonic::falldown()

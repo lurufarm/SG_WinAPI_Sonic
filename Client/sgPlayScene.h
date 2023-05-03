@@ -27,6 +27,8 @@ namespace sg
 
 		bool mMB;
 
+		std::vector<class Clouds*> mClouds;
+
 	};
 }
 

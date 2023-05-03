@@ -56,7 +56,7 @@ namespace sg
 		}
 		else
 		{
-			if (thispos.y >= 3600.0f)
+			if (thispos.y >= 2400.0f)
 			{
 				thispos.y = 1315.0f;
 				thistr->SetPos(thispos);

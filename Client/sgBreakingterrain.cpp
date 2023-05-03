@@ -91,6 +91,7 @@ namespace sg
 
 		if (mTime >= 0.3)
 		{
+			sBreaking->Play(false);
 			if (mPlay && mDir == false)
 			{
 				mAni->Play(L"Breakingterrain1", false);
@@ -109,7 +110,6 @@ namespace sg
 			}
 			if (mAni->IsComplete())
 			{
-				sBreaking->Play(false);
 				object::Destroy(this);
 			}
 		}

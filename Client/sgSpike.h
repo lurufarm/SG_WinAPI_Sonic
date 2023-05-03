@@ -37,6 +37,8 @@ namespace sg
 
 		eSpikeState mSpikeState;
 
+		class Sound* sSpike;
+
 	};
 }
 

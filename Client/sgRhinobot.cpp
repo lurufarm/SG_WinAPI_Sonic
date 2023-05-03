@@ -166,7 +166,7 @@ namespace sg
 			}
 		}
 		mAnimator->Play(L"rhinobot_move_right", true);
-		if (rhinomove.x <= mOriginPos.x - 300)
+		if (rhinomove.x <= mOriginPos.x - 200)
 		{
 			mAnimator->Play(L"rhinobot_idle2_left", false);
 			if (mAnimator->IsComplete())
@@ -191,7 +191,7 @@ namespace sg
 		mAnimator->Play(L"rhinobot_move_left", true);
 		rhinomove.x += 200.0f * Time::DeltaTime();
 		tr->SetPos(rhinomove);
-		if (rhinomove.x >= mOriginPos.x + 300)
+		if (rhinomove.x >= mOriginPos.x + 200)
 		{
 			mAnimator->Play(L"rhinobot_idle2_right", false);
 			if (mAnimator->IsComplete())

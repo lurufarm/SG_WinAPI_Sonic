@@ -33,7 +33,7 @@ namespace sg
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		mPos = tr->GetPos() + mCenter;
 
-		if (Input::GetKeyDown(eKeyCode::Ctrl))
+		if (Input::GetKeyDown(eKeyCode::A))
 		{
 			if (mOnOff == true)
 			{

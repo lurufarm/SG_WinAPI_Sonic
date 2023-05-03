@@ -23,6 +23,11 @@ namespace sg
 
 		GameObject* mTarget;
 		class Sound* mBG;
+		LOGFONT mFont;
+
+		std::vector<Clouds*> mClouds;
+
+		float mTime;
 
 	};
 }

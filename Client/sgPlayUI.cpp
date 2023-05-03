@@ -66,7 +66,10 @@ namespace sg
 
 		TransparentBlt(hdc, 0, 0, mImage->GetWidth(), mImage->GetHeight(), mImage->GetHdc(), 0, 0, mImage->GetWidth(), mImage->GetHeight(), RGB(255, 0, 255));
 		HFONT font = CreateFontIndirect(&mFont);
+		HFONT oldfont = static_cast<HFONT>(SelectObject(hdc, font));
 		HFONT font2 = CreateFontIndirect(&mFont2);
+		HFONT oldfont2 = static_cast<HFONT>(SelectObject(hdc, font2));
+
 		SelectObject(hdc, font);
 		SetBkMode(hdc, TRANSPARENT);
 		SetTextColor(hdc, RGB(255, 255, 255));
@@ -85,6 +88,10 @@ namespace sg
 		std::wstring lifeString = lifeStream.str();
 		TextOut(hdc, 102, 772, lifeString.c_str(), static_cast<int>(lifeString.length()));
 		
+		SelectObject(hdc, oldfont);
+		DeleteObject(font);
+		SelectObject(hdc, oldfont2);
+		DeleteObject(font2);
 
 	}
 	void PlayUI::Release()

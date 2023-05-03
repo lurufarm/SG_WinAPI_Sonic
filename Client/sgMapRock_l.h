@@ -7,9 +7,9 @@ namespace sg
 	class MapRock_l : public GameObject
 	{
 	public:
+
 		MapRock_l();
 		~MapRock_l();
-
 
 		enum eRocklState
 		{

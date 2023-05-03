@@ -6,6 +6,8 @@
 #include "sgGameObject.h"
 #include "sgCamera.h"
 
+#include "sgSonic.h"
+
 namespace sg
 {
 	Animation::Animation()
@@ -46,9 +48,14 @@ namespace sg
 	}
 	void Animation::Render(HDC hdc)
 	{
+		Sonic* sonic = dynamic_cast<Sonic*>(mAnimator->GetOwner());
 		Transform* tr
 			= mAnimator->GetOwner()->GetComponent<Transform>();
 		Vector2 scale = tr->GetScale();
+		if (mAnimator->GetOwner() == sonic)
+		{
+			int a = 0;
+		}
 
 		Vector2 pos = tr->GetPos();
 		pos = Camera::CalculatePos(pos);
@@ -63,6 +70,7 @@ namespace sg
 			, mSpriteSheet[mSpriteIndex].leftTop.x, mSpriteSheet[mSpriteIndex].leftTop.y
 			, mSpriteSheet[mSpriteIndex].size.x, mSpriteSheet[mSpriteIndex].size.y,
 			RGB(255, 0, 255));
+
 	}
 	void Animation::Create(Image* sheet, Vector2 leftTop
 		, UINT coulmn, UINT row, UINT spriteLength

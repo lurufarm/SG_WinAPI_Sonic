@@ -42,11 +42,11 @@ namespace sg
 		mTr = GetComponent<Transform>();
 		Image* spring = Resources::Load<Image>(L"spring", L"..\\Resources\\object\\spring.bmp");
 		mAnimator->CreateAnimation(L"up_norm", spring, Vector2::Zero, 3, 4, 1, Vector2::Zero, 0.1f);
-		mAnimator->CreateAnimation(L"up_used", spring, Vector2::Zero, 3, 4, 3, Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimation(L"up_used", spring, Vector2(32,0), 3, 4, 2, Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimation(L"right_norm", spring, Vector2(0, 32), 3, 4, 1, Vector2::Zero, 0.1f);
-		mAnimator->CreateAnimation(L"right_used", spring, Vector2(0, 32), 3, 4, 3, Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimation(L"right_used", spring, Vector2(32, 32), 3, 4, 2, Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimation(L"left_norm", spring, Vector2(0, 64), 3, 4, 1, Vector2::Zero, 0.1f);
-		mAnimator->CreateAnimation(L"left_used", spring, Vector2(0, 64), 3, 4, 3, Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimation(L"left_used", spring, Vector2(32, 64), 3, 4, 2, Vector2::Zero, 0.1f);
 		
 
 		sSpring = Resources::Load<Sound>(L"spring", L"..\\Resources\\sound\\sonic_spring.wav");

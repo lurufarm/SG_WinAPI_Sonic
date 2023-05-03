@@ -81,7 +81,7 @@ namespace sg
 			mRocklState = MapRock_l::eRocklState::broken;
 		}
 		
-		if (spos.y + 122 < mypos.y)
+		if (spos.y + 122 < mypos.y + 10)
 		{	
 			mOn = true;
 		}
@@ -96,7 +96,7 @@ namespace sg
 		Vector2 mypos = this->GetComponent<Transform>()->GetPos();
 		Vector2 spos = sonic->GetComponent<Transform>()->GetPos();
 
-		if (spos.y + 122 < mypos.y)
+		if (spos.y + 122 < mypos.y + 10)
 		{
 			mOn = true;
 		}

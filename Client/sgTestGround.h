@@ -34,13 +34,13 @@ namespace sg
 		}
 
 		Vector2 GetFrontPos() { return mFrontpos; }
-		bool mDarkRed;
+		bool mRed;
 		bool mDarkGreen;
 
 		bool mYellow;
 		bool mGreen;
 		bool mBlue;
-		bool mRed;
+		bool mOrange;
 
 	private:
 		class Collider* mCollider;

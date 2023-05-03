@@ -1,6 +1,7 @@
 #include "sgRing.h"
 #include "sgSonic.h"
 #include "sgPlayScene.h"
+#include "sgPlayScene2.h"
 
 #include "sgTime.h"
 #include "sgSceneManager.h"
@@ -15,6 +16,7 @@
 #include "sgCollider.h"
 
 extern sg::Sonic* mSonic;
+extern sg::Sonic* mSonic2;
 
 namespace sg
 {
@@ -48,11 +50,11 @@ namespace sg
 	{
 		Transform* tr = GetComponent<Transform>();
 		Vector2 ringpos = tr->GetPos();
-		Vector2 dir = mSonic->GetComponent<Transform>()->GetPos() - tr->GetPos();
-		dir.Nomalize();
-		/*Vector2(mSonic->GetComponent<Transform>()->GetPos().x - 1045, mSonic->GetComponent<Transform>()->GetPos().y - 690);*/
 		if (mSonic->mThunder)
 		{
+			Vector2 dir = mSonic->GetComponent<Transform>()->GetPos() - tr->GetPos();
+			dir.Nomalize();
+
 			if (fabs((mSonic->GetComponent<Transform>()->GetPos() - ringpos).Length()) <= 500.0f)
 			{
 				
@@ -63,13 +65,22 @@ namespace sg
 				ringpos.y += 500.0f * y * Time::DeltaTime();
 
 				tr->SetPos(ringpos);
+			}
+		}
+		if (mSonic2->mThunder)
+		{
+			Vector2 dir = mSonic2->GetComponent<Transform>()->GetPos() - tr->GetPos();
+			dir.Nomalize();
 
-				//Rigidbody* ringrb = AddComponent<Rigidbody>();
-				//ringrb->SetMass(1.0f);
-				//ringrb->SetGround(true);
-				//Vector2 ringvel = Vector2(300.0f, 300.0f);
-				//ringrb->SetVelocity(-dir * ringvel);
-			
+			if (fabs((mSonic2->GetComponent<Transform>()->GetPos() - ringpos).Length()) <= 500.0f)
+			{
+				float x = dir.x * cosf(PI / 7.0f) - dir.y * sinf(PI / 7.0f);
+				float y = dir.x * sinf(PI / 7.0f) + dir.y * cosf(PI / 7.0f);
+
+				ringpos.x += 500.0f * x * Time::DeltaTime();
+				ringpos.y += 500.0f * y * Time::DeltaTime();
+
+				tr->SetPos(ringpos);
 			}
 		}
 

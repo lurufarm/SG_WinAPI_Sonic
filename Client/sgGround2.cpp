@@ -73,7 +73,7 @@ namespace sg
 	{
 		GameObject::Update();
 
-		if (Input::GetKeyDown(eKeyCode::Ctrl)) // Ctrl 누르면 Render On/Off
+		if (Input::GetKeyDown(eKeyCode::A)) // A 누르면 Render On/Off
 		{
 			if (mOnOff == true)
 			{
@@ -125,6 +125,7 @@ namespace sg
 			if (monfoot != air)
 			{
 				mon->GetComponent<Rigidbody>()->SetGround(true);
+
 				value = Vector2(monpos.x + 60, monpos.y + 70);
 				while (mImage->GetPixel(value.x, value.y) != air)
 				{
@@ -160,7 +161,7 @@ namespace sg
 		{
 			playerRb->SetFriction(250);
 			playerRb->SetGround(true);
-			//value = Vector2::Zero;
+			value = Vector2::Zero;
 			value = Vector2(pos.x + 62.5, pos.y + 122);
 			while (mImage->GetPixel(value.x, value.y) != air
 				&& mImage->GetPixel(value.x, value.y) != NULL
@@ -176,15 +177,16 @@ namespace sg
 			&& myupcolor != NULL
 			&& myupcolor != RGB(127, 0, 0)
 			&& myupcolor != yellowloop
-			&& myupcolor != blueloop
+			//&& myupcolor != blueloop
 			&& mPlayer->GetSonicState() != Sonic::eSonicState::death)  // 내 머리가 땅일 경우 땅으로 인식하기
 		{
 			playerRb->SetGround(false);
+			value = Vector2::Zero;
 			value = Vector2(pos.x + 62.5, pos.y + 35);
 			while (mImage->GetPixel(value.x, value.y) != air
 				&& mImage->GetPixel(value.x, value.y) != NULL
 				&& mImage->GetPixel(value.x, value.y) != yellowloop
-				&& mImage->GetPixel(value.x, value.y) != blueloop
+				//&& mImage->GetPixel(value.x, value.y) != blueloop
 				&& mPlayer->GetSonicState() != Sonic::eSonicState::death)
 			{
 				pos.y += 1;
@@ -525,9 +527,9 @@ namespace sg
 				mImage->GetHdc(), 0, 0,
 				mImage->GetWidth(), mImage->GetHeight(), RGB(255, 0, 255));
 
-			HPEN pen = CreatePen(BS_SOLID, 2, RGB(255, 255, 255));
-			pen = (HPEN)SelectObject(hdc, pen);
-			Ellipse(hdc, Camera::CalculatePos(ppos).x - 1, Camera::CalculatePos(ppos).y - 1, Camera::CalculatePos(ppos).x + 1, Camera::CalculatePos(ppos).y + 1);
+			//HPEN pen = CreatePen(BS_SOLID, 2, RGB(255, 255, 255));
+			//pen = (HPEN)SelectObject(hdc, pen);
+			//Ellipse(hdc, Camera::CalculatePos(ppos).x - 1, Camera::CalculatePos(ppos).y - 1, Camera::CalculatePos(ppos).x + 1, Camera::CalculatePos(ppos).y + 1);
 		}
 
 

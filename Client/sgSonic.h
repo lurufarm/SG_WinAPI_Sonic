@@ -129,6 +129,7 @@ namespace sg
 		Vector2 mSonicVelocity;
 		Vector2 mResetPos;
 		float mTime;
+		float mHurtTime;
 
 		static int mRings;
 		static int mLife;
