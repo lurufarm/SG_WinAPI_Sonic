@@ -15,7 +15,7 @@ namespace sg
 		, mSize(100.0f, 100.0f)
 		, mID(ColliderNumber++)
 		, mCollisionCount(0)
-		, mOnOff(true)
+		, mOnOff(false)
 	{
 
 	}

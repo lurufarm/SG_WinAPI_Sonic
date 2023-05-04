@@ -35,7 +35,7 @@ namespace sg
 {
 	Ground2::Ground2()
 		: mbAble(false)
-		, mOnOff(true)
+		, mOnOff(false)
 		, mDarkRed(false)
 		, mDarkGreen(false)
 		, mYellow(false)

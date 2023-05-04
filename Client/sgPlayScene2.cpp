@@ -67,7 +67,7 @@ namespace sg
 	}
 	void PlayScene2::Initialize()
 	{
-		mSonic2 = object::Instantiate<Sonic>(Vector2(7800.0f, 2000.0f), eLayerType::Player, eSceneType::Play2);
+		mSonic2 = object::Instantiate<Sonic>(Vector2(300.0f, 2000.0f), eLayerType::Player, eSceneType::Play2);
 		mBG = Resources::Load<Sound>(L"PlayTheme2", L"..\\Resources\\sound\\music\\act2bg.wav");
 
 		Background2* bg2_3 = object::Instantiate<Background2>(eLayerType::BG, eSceneType::Play2);
