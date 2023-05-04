@@ -440,8 +440,8 @@ namespace sg
 				{
 					mFrontpos = (Vector2(pos.x + 10 + i, pos.y + 50) - Vector2(pos.x + 92.5, pos.y + 123)).Nomalize();
 					playerRb->SetGravity(Vector2(mFrontpos.x, -1.0f * fabs(velocity.y * mFrontpos.y)));
-					playerRb->SetVelocity(Vector2(velocity.x, -1.0f * fabs(velocity.Length() * mFrontpos.y)));
-					playerRb->AddVelocity(Vector2(0, -10));
+					playerRb->SetVelocity(Vector2(velocity.x, -0.8f * fabs(velocity.Length() * mFrontpos.y)));
+					//playerRb->AddVelocity(Vector2(0, -10));
 				}
 			}
 		}
