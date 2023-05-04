@@ -1547,7 +1547,7 @@ namespace sg
 				spreadrings.x = spredx_distribution(gen);
 				spreadrings.y = spredy_distribution(gen);
 
-				Ring* ring = object::Instantiate<Ring>(genrings + spos, eLayerType::Ring, eSceneType::Play);
+				Ring* ring = object::Instantiate<Ring>(genrings + spos, eLayerType::Ring, SceneManager::GetActiveScene2());
 				Rigidbody* ringrigid = ring->AddComponent<Rigidbody>();
 				ringrigid->SetMass(1.0f);
 				ringrigid->SetVelocity(spreadrings);

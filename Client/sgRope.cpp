@@ -195,6 +195,5 @@ namespace sg
 		Sonic* sonic = dynamic_cast<Sonic*>(other->GetOwner());
 		mUse = false;
 		sonic->GetComponent<Rigidbody>()->SetGround(false);
-		Rope::Initialize();
 	}
 }

@@ -67,7 +67,7 @@ namespace sg
 	}
 	void PlayScene2::Initialize()
 	{
-		mSonic2 = object::Instantiate<Sonic>(Vector2(14300.0f, 1500.0f), eLayerType::Player, eSceneType::Play2);
+		mSonic2 = object::Instantiate<Sonic>(Vector2(7800.0f, 2000.0f), eLayerType::Player, eSceneType::Play2);
 		mBG = Resources::Load<Sound>(L"PlayTheme2", L"..\\Resources\\sound\\music\\act2bg.wav");
 
 		Background2* bg2_3 = object::Instantiate<Background2>(eLayerType::BG, eSceneType::Play2);
@@ -91,13 +91,13 @@ namespace sg
 		mTrees->mAniN = true;
 
 		//----------------------------------- Map
-		MapObjects2* mobj0 = object::MapObjects2Instantiate(Vector2(0, 0), eLayerType::MapObjects, eSceneType::Play2, 0);
-		MapObjects2* mobj1 = object::MapObjects2Instantiate(Vector2(4568, 0), eLayerType::MapObjects, eSceneType::Play2, 1);
-		MapObjects2* mobj2 = object::MapObjects2Instantiate(Vector2(9136, 0), eLayerType::MapObjects, eSceneType::Play2, 2);
-		MapObjects2* mobj3 = object::MapObjects2Instantiate(Vector2(13704, 0), eLayerType::MapObjects, eSceneType::Play2, 3);
-		MapObjects2* mobj4 = object::MapObjects2Instantiate(Vector2(18272, 0), eLayerType::MapObjects, eSceneType::Play2, 4);
-		MapObjects2* mobj5 = object::MapObjects2Instantiate(Vector2(20864, 0), eLayerType::MapObjects, eSceneType::Play2, 5);
-		MapObjects2* mobj6 = object::MapObjects2Instantiate(Vector2(25432, 0), eLayerType::MapObjects, eSceneType::Play2, 6);
+		//MapObjects2* mobj0 = object::MapObjects2Instantiate(Vector2(0, 0), eLayerType::MapObjects, eSceneType::Play2, 0);
+		//MapObjects2* mobj1 = object::MapObjects2Instantiate(Vector2(4568, 0), eLayerType::MapObjects, eSceneType::Play2, 1);
+		//MapObjects2* mobj2 = object::MapObjects2Instantiate(Vector2(9136, 0), eLayerType::MapObjects, eSceneType::Play2, 2);
+		//MapObjects2* mobj3 = object::MapObjects2Instantiate(Vector2(13704, 0), eLayerType::MapObjects, eSceneType::Play2, 3);
+		//MapObjects2* mobj4 = object::MapObjects2Instantiate(Vector2(18272, 0), eLayerType::MapObjects, eSceneType::Play2, 4);
+		//MapObjects2* mobj5 = object::MapObjects2Instantiate(Vector2(20864, 0), eLayerType::MapObjects, eSceneType::Play2, 5);
+		//MapObjects2* mobj6 = object::MapObjects2Instantiate(Vector2(25432, 0), eLayerType::MapObjects, eSceneType::Play2, 6);
 		//----------------------------------- Map
 
 		//----------------------------------- MapDeco
@@ -250,9 +250,20 @@ namespace sg
 			SceneManager::LoadScene(eSceneType::Ending);
 		}
 
+
+		if (mSonic2->GetComponent<Transform>()->GetPos().x > 13000.0f && mSonic2->GetComponent<Transform>()->GetPos().y < 800)
+		{
+			Camera::SetTarget(nullptr);
+		}
+		else if (mSonic2->GetComponent<Transform>()->GetPos().y > 800)
+		{
+			Camera::SetTarget(mSonic2);
+		}
+
+
 		if (mSonic2->GetComponent<Transform>()->GetPos().x > 14450.0f && mSonic2->GetComponent<Transform>()->GetPos().x < 21000.0f)
 		{
-
+			Camera::SetTarget(mSonic2);
 			float time = 0.0f;
 			int index1 = 0;
 			int index2 = 0;
@@ -293,6 +304,8 @@ namespace sg
 
 		}
 		
+		
+
 		
 		if ((mSonic2->GetComponent<Transform>()->GetPos().x >= 23000.0f && mLBrb == false))
 		{
